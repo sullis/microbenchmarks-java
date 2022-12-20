@@ -13,6 +13,7 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
 public class LongAdderBenchmark {
@@ -30,30 +31,30 @@ public class LongAdderBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void testLongAdder() {
+    public void testLongAdder(final Blackhole bh) {
         longAdder.increment();
-        final long afterIncrement = longAdder.longValue();
+        bh.consume(longAdder.longValue());
         longAdder.decrement();
-        final long afterDecrement = longAdder.longValue();
+        bh.consume(longAdder.longValue());
     }
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void testAtomicLong() {
+    public void testAtomicLong(final Blackhole bh) {
         atomicLong.incrementAndGet();
-        final long afterIncrement = atomicLong.longValue();
+        bh.consume(atomicLong.longValue());
         atomicLong.decrementAndGet();
-        final long afterDecrement = atomicLong.longValue();
+        bh.consume(atomicLong.longValue());
     }
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void testAtomicInteger() {
+    public void testAtomicInteger(final Blackhole bh) {
         atomicInteger.incrementAndGet();
-        final long afterIncrement = atomicInteger.longValue();
+        bh.consume(atomicInteger.longValue());
         atomicInteger.decrementAndGet();
-        final long afterDecrement = atomicInteger.longValue();
+        bh.consume(atomicInteger.longValue());
     }
 }
