@@ -53,8 +53,8 @@ public class LongAdderBenchmark {
     @Benchmark
     public void testAtomicInteger(final Blackhole bh) {
         atomicInteger.incrementAndGet();
-        bh.consume(atomicInteger.longValue());
+        bh.consume(atomicInteger.intValue());
         atomicInteger.decrementAndGet();
-        bh.consume(atomicInteger.longValue());
+        bh.consume(atomicInteger.intValue());
     }
 }
