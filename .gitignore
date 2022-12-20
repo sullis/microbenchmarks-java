@@ -72,3 +72,6 @@ atlassian-ide-plugin.xml
 
 # publishing secrets
 secrets/signing-key
+
+# Ignore Gradle build output directory
+build
