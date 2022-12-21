@@ -17,16 +17,9 @@ import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
 public class LongAdderBenchmark {
-    private LongAdder longAdder;
-    private AtomicLong atomicLong;
-    private AtomicInteger atomicInteger;
-
-    @Setup
-    public void setUp() throws Exception {
-        longAdder = new LongAdder();
-        atomicInteger = new AtomicInteger();
-        atomicLong = new AtomicLong();
-    }
+    private static final LongAdder longAdder = new LongAdder();
+    private static final AtomicLong atomicLong = new AtomicLong();
+    private static final AtomicInteger atomicInteger = new AtomicInteger();
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
