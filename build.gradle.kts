@@ -26,7 +26,7 @@ testing {
 jmh {
   iterations.set(10)
   warmupIterations.set(3)
-  threads.set(32)
+  threads.set(Runtime.getRuntime().availableProcessors())
   failOnError.set(true)
   jmhVersion.set("1.36")
 }
