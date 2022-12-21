@@ -4,3 +4,6 @@
 ./gradlew clean jmh
 ```
 
+# LongAdderBenchmark results
+
+TBD
