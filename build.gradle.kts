@@ -26,5 +26,5 @@ testing {
 jmh {
   iterations.set(10)
   warmupIterations.set(3)
-  threads.set(8)
+  threads.set(32)
 }
