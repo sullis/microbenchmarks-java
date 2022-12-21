@@ -27,5 +27,6 @@ jmh {
   iterations.set(10)
   warmupIterations.set(3)
   threads.set(32)
+  failOnError.set(true)
   jmhVersion.set("1.36")
 }
