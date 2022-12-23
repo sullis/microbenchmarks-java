@@ -1,7 +1,8 @@
 # microbenchmarks-java
 
 ```
-./gradlew clean jmh
+./gradlew clean :longadder:jmh
+./gradlew clean :random:jmh
 ```
 
 # LongAdderBenchmark results
