@@ -26,8 +26,9 @@ subprojects {
   apply(plugin = "me.champeau.jmh")
 
   jmh {
-    iterations.set(10)
-    warmupIterations.set(3)
+    fork.set(2)
+    iterations.set(5)
+    warmupIterations.set(2)
     threads.set(Runtime.getRuntime().availableProcessors())
     failOnError.set(true)
     jmhVersion.set("1.36")
