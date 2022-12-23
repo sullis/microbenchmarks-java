@@ -10,6 +10,6 @@
 ./gradlew clean :random:jmh
 ```
 
-# LongAdderBenchmark results
+## LongAdderBenchmark results
 
 TBD
