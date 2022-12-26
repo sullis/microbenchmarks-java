@@ -26,10 +26,6 @@ public class RandomBenchmark {
     public void measureRandom(final Blackhole bh) {
         final Random r = this.randomSupplier.get();
         bh.consume(r.nextInt());
-        bh.consume(r.nextLong());
-        bh.consume(r.nextFloat());
-        bh.consume(r.nextDouble());
-        bh.consume(r.nextBoolean());
     }
 
     private static final Supplier<java.util.Random> javaUtilRandomSupplier = new Supplier<Random>() {
