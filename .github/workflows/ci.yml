@@ -10,21 +10,50 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
+  longadder:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'zulu'
-    - name: JMH LongAdder
-      run: ./gradlew clean :longadder:jmh
-    - name: JMH java.util.Random
-      run: ./gradlew clean :random:jmh
-    - name: JMH log4j2 clock
-      run: ./gradlew clean :log4j2clock:jmh
-    - name: JMH UUID generation
-      run: ./gradlew clean :uuid:jmh
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+      - name: JMH LongAdder
+        run: ./gradlew clean :longadder:jmh
+
+  random:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+      - name: JMH java.util.Random
+        run: ./gradlew clean :random:jmh
+
+  log4j2clock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+      - name: JMH log4j2 clock
+        run: ./gradlew clean :log4j2clock:jmh
+
+  uuid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+      - name: JMH UUID generation
+        run: ./gradlew clean :uuid:jmh
