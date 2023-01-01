@@ -26,7 +26,7 @@ public class UuidBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void measureUuidGeneration(final Blackhole bh) {
+    public void uuidGeneration(final Blackhole bh) {
         final UUID uuid = this.uuidSupplier.get();
         bh.consume(uuid);
     }
