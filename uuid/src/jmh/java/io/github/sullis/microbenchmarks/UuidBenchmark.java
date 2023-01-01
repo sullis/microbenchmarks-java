@@ -33,7 +33,7 @@ public class UuidBenchmark {
 
     public enum UuidSupplier {
         JAVA_UTIL_UUID(java.util.UUID::randomUUID),
-        NETFLIX_UUID(new Supplier<UUID>() {
+        NETFLIX_CONCURRENT_UUID_FACTORY(new Supplier<UUID>() {
             private static final com.netflix.util.concurrent.ConcurrentUUIDFactory factory = new ConcurrentUUIDFactory();
 
             @Override
