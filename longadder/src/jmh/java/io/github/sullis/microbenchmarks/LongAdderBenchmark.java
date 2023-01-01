@@ -2,9 +2,6 @@
 package io.github.sullis.microbenchmarks;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.LongAdder;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -40,11 +37,47 @@ public class LongAdderBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void testCounter(final Blackhole bh) {
+    public void incrementOnly(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
         c.increment();
+        bh.consume(c);
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void decrementOnly(final Blackhole bh) {
+        Counter c = this.counterSupplier.get();
+        c.decrement();
+        bh.consume(c);
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void getOnly(final Blackhole bh) {
+        Counter c = this.counterSupplier.get();
         bh.consume(c.longValue());
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void incrementDecrement(final Blackhole bh) {
+        Counter c = this.counterSupplier.get();
+        c.increment();
+        c.decrement();
+        bh.consume(c);
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void incrementDecrementGet(final Blackhole bh) {
+        Counter c = this.counterSupplier.get();
+        c.increment();
         c.decrement();
         bh.consume(c.longValue());
     }
+
 }
