@@ -23,9 +23,17 @@ public class RandomBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void measureRandom(final Blackhole bh) {
+    public void nextInt(final Blackhole bh) {
         final Random r = this.randomSupplier.get();
         bh.consume(r.nextInt());
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void nextDouble(final Blackhole bh) {
+        final Random r = this.randomSupplier.get();
+        bh.consume(r.nextDouble());
     }
 
     private static final Supplier<java.util.Random> javaUtilRandomSupplier = new Supplier<Random>() {
