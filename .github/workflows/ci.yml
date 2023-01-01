@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK ${{ JDK }}
+      - name: Set up JDK ${{ env.JDK }}
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ JDK }}
+          java-version: ${{ env.JDK }}
           distribution: 'zulu'
       - name: JMH LongAdder
         run: ./gradlew clean :longadder:jmh
@@ -29,10 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK ${{ JDK }}
+      - name: Set up JDK ${{ env.JDK }}
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ JDK }}
+          java-version: ${{ env.JDK }}
           distribution: 'zulu'
       - name: JMH java.util.Random
         run: ./gradlew clean :random:jmh
@@ -41,10 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK ${{ JDK }}
+      - name: Set up JDK ${{ env.JDK }}
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ JDK }}
+          java-version: ${{ env.JDK }}
           distribution: 'zulu'
       - name: JMH log4j2 clock
         run: ./gradlew clean :log4j2clock:jmh
@@ -53,10 +53,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK ${{ JDK }}
+      - name: Set up JDK ${{ env.JDK }}
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ JDK }}
+          java-version: ${{ env.JDK }}
           distribution: 'zulu'
       - name: JMH UUID generation
         run: ./gradlew clean :uuid:jmh
