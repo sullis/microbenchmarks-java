@@ -27,8 +27,8 @@ subprojects {
 
   jmh {
     fork.set(2)
-    iterations.set(50)
-    warmupIterations.set(5)
+    iterations.set(6)
+    warmupIterations.set(2)
     threads.set(32)
     failOnError.set(true)
     jmhVersion.set("1.36")
