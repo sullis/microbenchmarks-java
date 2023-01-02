@@ -12,12 +12,13 @@
 
 ## LongAdderBenchmark results
 
+
+```
 MacOS 12.6.1
 MacBook Pro (16-inch, 2021)
 Chip Apple M1 Pro
 OpenJDK Runtime Environment Zulu17.34+19-CA (build 17.0.3+7-LTS)
 
-```
 Benchmark                                 (counterSupplier)   Mode  Cnt     Score    Error   Units
 LongAdderBenchmark.decrementOnly             ATOMIC_INTEGER  thrpt   12    13.064 ±  0.205  ops/us
 LongAdderBenchmark.decrementOnly                ATOMIC_LONG  thrpt   12    12.888 ±  0.149  ops/us
