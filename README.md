@@ -19,6 +19,15 @@ MacBook Pro (16-inch, 2021)
 Chip Apple M1 Pro
 OpenJDK Runtime Environment Zulu17.34+19-CA (build 17.0.3+7-LTS)
 
+# JMH version: 1.36
+# VM version: JDK 17.0.3, OpenJDK 64-Bit Server VM, 17.0.3+7-LTS
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 10 s each
+# Measurement: 6 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 32 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+
 Benchmark                                 (counterSupplier)   Mode  Cnt     Score    Error   Units
 LongAdderBenchmark.decrementOnly             ATOMIC_INTEGER  thrpt   12    13.064 ±  0.205  ops/us
 LongAdderBenchmark.decrementOnly                ATOMIC_LONG  thrpt   12    12.888 ±  0.149  ops/us
