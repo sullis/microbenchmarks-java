@@ -12,6 +12,8 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Thread)
 public class LongAdderBenchmark {
     public enum CounterSupplier {
@@ -35,8 +37,6 @@ public class LongAdderBenchmark {
     @Param
     private CounterSupplier counterSupplier;
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void incrementOnly(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
@@ -44,8 +44,6 @@ public class LongAdderBenchmark {
         bh.consume(c);
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void decrementOnly(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
@@ -53,16 +51,12 @@ public class LongAdderBenchmark {
         bh.consume(c);
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void getOnly(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
         bh.consume(c.longValue());
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void incrementDecrement(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
@@ -71,8 +65,6 @@ public class LongAdderBenchmark {
         bh.consume(c);
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void incrementDecrementGet(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
@@ -81,8 +73,6 @@ public class LongAdderBenchmark {
         bh.consume(c.longValue());
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void getIncrementDecrement(final Blackhole bh) {
         Counter c = this.counterSupplier.get();
