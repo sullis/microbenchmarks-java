@@ -17,7 +17,8 @@ public class LongAdderBenchmark {
     public enum CounterSupplier {
         ATOMIC_INTEGER(new AtomicIntegerCounter()),
         ATOMIC_LONG(new AtomicLongCounter()),
-        LONG_ADDER(new LongAdderCounter());
+        LONG_ADDER(new LongAdderCounter()),
+        AGRONA_ATOMIC_COUNTER(new AgronaAtomicCounter());
 
         private final Counter counter;
 
