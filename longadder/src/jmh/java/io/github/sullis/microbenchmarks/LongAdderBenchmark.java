@@ -80,4 +80,13 @@ public class LongAdderBenchmark {
         c.increment();
         c.decrement();
     }
+
+    @Benchmark
+    public void incrementGetDecrementGet(final Blackhole bh) {
+        Counter c = this.counterSupplier.get();
+        c.increment();
+        bh.consume(c.longValue());
+        c.decrement();
+        bh.consume(c.longValue());
+    }
 }
