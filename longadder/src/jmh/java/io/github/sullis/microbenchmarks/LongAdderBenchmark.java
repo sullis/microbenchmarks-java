@@ -20,7 +20,6 @@ public class LongAdderBenchmark {
         ATOMIC_INTEGER(new AtomicIntegerCounter()),
         ATOMIC_LONG(new AtomicLongCounter()),
         LONG_ADDER(new LongAdderCounter()),
-        AGRONA_ATOMIC_COUNTER(new AgronaAtomicCounter()),
         CACHED_COUNTER_LONG_ADDER(new CachedCounter(new LongAdderCounter())),
         CACHED_COUNTER_ATOMIC_INTEGER(new CachedCounter(new AtomicIntegerCounter())),
         CACHED_COUNTER_ATOMIC_LONG(new CachedCounter(new AtomicLongCounter()));
