@@ -11,6 +11,7 @@ permissions:
 
 env:
   JDK: '17'
+  distribution: 'zulu'
   GRADLE_COMMAND: './gradlew --no-daemon'
 
 jobs:
@@ -22,7 +23,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JDK }}
-          distribution: 'zulu'
+          distribution: ${{ env.DISTRIBUTION }}
       - name: JMH LongAdder
         run: ${{ env.GRADLE_COMMAND }} clean :longadder:jmh
 
@@ -34,7 +35,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JDK }}
-          distribution: 'zulu'
+          distribution: ${{ env.DISTRIBUTION }}
       - name: JMH java.util.Random
         run: ${{ env.GRADLE_COMMAND }} clean :random:jmh
 
@@ -46,7 +47,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JDK }}
-          distribution: 'zulu'
+          distribution: ${{ env.DISTRIBUTION }}
       - name: JMH log4j2 clock
         run: ${{ env.GRADLE_COMMAND }} clean :log4j2clock:jmh
 
@@ -58,6 +59,6 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JDK }}
-          distribution: 'zulu'
+          distribution: ${{ env.DISTRIBUTION }}
       - name: JMH UUID generation
         run: ${{ env.GRADLE_COMMAND }} clean :uuid:jmh
