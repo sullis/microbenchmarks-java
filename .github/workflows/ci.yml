@@ -11,7 +11,7 @@ permissions:
 
 env:
   JDK: '17'
-  distribution: 'zulu'
+  DISTRIBUTION: 'zulu'
   GRADLE_COMMAND: './gradlew --no-daemon'
 
 jobs:
