@@ -1,7 +1,6 @@
 
 package io.github.sullis.microbenchmarks;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -22,9 +21,9 @@ public class LongAdderBenchmark {
         ATOMIC_LONG(new AtomicLongCounter()),
         LONG_ADDER(new LongAdderCounter()),
         AGRONA_ATOMIC_COUNTER(new AgronaAtomicCounter()),
-        CACHED_COUNTER_LONG_ADDER(new CachedCounter(new LongAdderCounter(), Duration.ofMillis(5))),
-        CACHED_COUNTER_ATOMIC_INTEGER(new CachedCounter(new AtomicIntegerCounter(), Duration.ofMillis(5))),
-        CACHED_COUNTER_ATOMIC_LONG_LONG(new CachedCounter(new AtomicLongCounter(), Duration.ofMillis(5)));
+        CACHED_COUNTER_LONG_ADDER(new CachedCounter(new LongAdderCounter())),
+        CACHED_COUNTER_ATOMIC_INTEGER(new CachedCounter(new AtomicIntegerCounter())),
+        CACHED_COUNTER_ATOMIC_LONG(new CachedCounter(new AtomicLongCounter()));
 
         private final Counter counter;
 

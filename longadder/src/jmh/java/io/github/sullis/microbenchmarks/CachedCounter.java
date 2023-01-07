@@ -1,16 +1,18 @@
 package io.github.sullis.microbenchmarks;
 
-import java.time.Duration;
+import org.apache.logging.log4j.core.util.Clock;
+import org.apache.logging.log4j.core.util.CoarseCachedClock;
 
 public class CachedCounter implements Counter {
     private final Counter counter;
-    private final long maxAgeMillis;
-    private volatile long cachedValue = 0;
-    private volatile long snapshotTime = 0;
+    private final Clock clock = CoarseCachedClock.instance();
+    private volatile long snapshotValue = 0;
+    private volatile long snapshotTime;
 
-    public CachedCounter(final Counter c, final Duration maxAge) {
+    public CachedCounter(final Counter c) {
         this.counter = c;
-        this.maxAgeMillis = maxAge.toMillis();
+        this.snapshotValue = this.counter.longValue();
+        this.snapshotTime = clock.currentTimeMillis();
     }
 
     @Override
@@ -25,12 +27,12 @@ public class CachedCounter implements Counter {
 
     @Override
     public long longValue() {
-        final long now = System.currentTimeMillis();
+        final long now = this.clock.currentTimeMillis();
         final long age = now - snapshotTime;
-        if (age > maxAgeMillis) {
-            cachedValue = this.counter.longValue();
+        if (age > 0) {
+            snapshotValue = this.counter.longValue();
             snapshotTime = now;
         }
-        return cachedValue;
+        return snapshotValue;
     }
 }
