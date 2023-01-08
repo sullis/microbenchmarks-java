@@ -28,35 +28,42 @@ OpenJDK Runtime Environment Zulu17.34+19-CA (build 17.0.3+7-LTS)
 # Threads: 32 threads, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
 
-Benchmark                                            (counterSupplier)   Mode  Cnt     Score    Error   Units
-LongAdderBenchmark.decrementOnly                        ATOMIC_INTEGER  thrpt   10    12.330 ±  1.788  ops/us
-LongAdderBenchmark.decrementOnly                           ATOMIC_LONG  thrpt   10    13.066 ±  0.137  ops/us
-LongAdderBenchmark.decrementOnly                            LONG_ADDER  thrpt   10  1256.873 ±  2.600  ops/us
-LongAdderBenchmark.decrementOnly             CACHED_LONG_ADDER_COUNTER  thrpt   10  1256.171 ±  2.995  ops/us
-LongAdderBenchmark.getIncrementDecrement                ATOMIC_INTEGER  thrpt   10     6.401 ±  0.052  ops/us
-LongAdderBenchmark.getIncrementDecrement                   ATOMIC_LONG  thrpt   10     6.417 ±  0.065  ops/us
-LongAdderBenchmark.getIncrementDecrement                    LONG_ADDER  thrpt   10    29.784 ±  0.045  ops/us
-LongAdderBenchmark.getIncrementDecrement     CACHED_LONG_ADDER_COUNTER  thrpt   10   618.536 ±  4.233  ops/us
-LongAdderBenchmark.getOnly                              ATOMIC_INTEGER  thrpt   10  5290.816 ± 29.227  ops/us
-LongAdderBenchmark.getOnly                                 ATOMIC_LONG  thrpt   10  5296.030 ± 36.797  ops/us
-LongAdderBenchmark.getOnly                                  LONG_ADDER  thrpt   10  3397.347 ±  8.901  ops/us
-LongAdderBenchmark.getOnly                   CACHED_LONG_ADDER_COUNTER  thrpt   10  5824.319 ± 50.918  ops/us
-LongAdderBenchmark.incrementDecrement                   ATOMIC_INTEGER  thrpt   10     6.470 ±  0.027  ops/us
-LongAdderBenchmark.incrementDecrement                      ATOMIC_LONG  thrpt   10     6.430 ±  0.042  ops/us
-LongAdderBenchmark.incrementDecrement                       LONG_ADDER  thrpt   10   611.541 ± 33.077  ops/us
-LongAdderBenchmark.incrementDecrement        CACHED_LONG_ADDER_COUNTER  thrpt   10   620.710 ±  0.559  ops/us
-LongAdderBenchmark.incrementDecrementGet                ATOMIC_INTEGER  thrpt   10     6.438 ±  0.120  ops/us
-LongAdderBenchmark.incrementDecrementGet                   ATOMIC_LONG  thrpt   10     6.523 ±  0.117  ops/us
-LongAdderBenchmark.incrementDecrementGet                    LONG_ADDER  thrpt   10    29.559 ±  0.055  ops/us
-LongAdderBenchmark.incrementDecrementGet     CACHED_LONG_ADDER_COUNTER  thrpt   10   618.970 ±  1.295  ops/us
-LongAdderBenchmark.incrementGetDecrementGet             ATOMIC_INTEGER  thrpt   10     6.480 ±  0.069  ops/us
-LongAdderBenchmark.incrementGetDecrementGet                ATOMIC_LONG  thrpt   10     6.463 ±  0.135  ops/us
-LongAdderBenchmark.incrementGetDecrementGet                 LONG_ADDER  thrpt   10    16.174 ±  0.129  ops/us
-LongAdderBenchmark.incrementGetDecrementGet  CACHED_LONG_ADDER_COUNTER  thrpt   10   617.429 ±  4.838  ops/us
-LongAdderBenchmark.incrementOnly                        ATOMIC_INTEGER  thrpt   10    13.117 ±  0.172  ops/us
-LongAdderBenchmark.incrementOnly                           ATOMIC_LONG  thrpt   10    12.783 ±  0.094  ops/us
-LongAdderBenchmark.incrementOnly                            LONG_ADDER  thrpt   10  1255.144 ±  2.429  ops/us
-LongAdderBenchmark.incrementOnly             CACHED_LONG_ADDER_COUNTER  thrpt   10  1255.235 ±  2.030  ops/us
+Benchmark                                                    (counterSupplier)   Mode  Cnt     Score     Error   Units
+LongAdderBenchmark.decrementOnly                                ATOMIC_INTEGER  thrpt   10    13.042 ±   0.536  ops/us
+LongAdderBenchmark.decrementOnly                                   ATOMIC_LONG  thrpt   10    12.846 ±   0.172  ops/us
+LongAdderBenchmark.decrementOnly                                    LONG_ADDER  thrpt   10  1257.957 ±   2.688  ops/us
+LongAdderBenchmark.decrementOnly               CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10  1258.442 ±   2.968  ops/us
+LongAdderBenchmark.decrementOnly             CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10  1259.370 ±   1.324  ops/us
+LongAdderBenchmark.getIncrementDecrement                        ATOMIC_INTEGER  thrpt   10     6.453 ±   0.100  ops/us
+LongAdderBenchmark.getIncrementDecrement                           ATOMIC_LONG  thrpt   10     6.489 ±   0.092  ops/us
+LongAdderBenchmark.getIncrementDecrement                            LONG_ADDER  thrpt   10    29.757 ±   0.073  ops/us
+LongAdderBenchmark.getIncrementDecrement       CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10   619.561 ±   1.068  ops/us
+LongAdderBenchmark.getIncrementDecrement     CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10   620.349 ±   0.497  ops/us
+LongAdderBenchmark.getOnly                                      ATOMIC_INTEGER  thrpt   10  5286.029 ±  68.864  ops/us
+LongAdderBenchmark.getOnly                                         ATOMIC_LONG  thrpt   10  5263.484 ±  65.581  ops/us
+LongAdderBenchmark.getOnly                                          LONG_ADDER  thrpt   10  3405.585 ±  18.088  ops/us
+LongAdderBenchmark.getOnly                     CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10  5762.971 ± 155.743  ops/us
+LongAdderBenchmark.getOnly                   CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10  5825.892 ±  28.763  ops/us
+LongAdderBenchmark.incrementDecrement                           ATOMIC_INTEGER  thrpt   10     6.584 ±   0.097  ops/us
+LongAdderBenchmark.incrementDecrement                              ATOMIC_LONG  thrpt   10     6.461 ±   0.134  ops/us
+LongAdderBenchmark.incrementDecrement                               LONG_ADDER  thrpt   10   619.795 ±   2.052  ops/us
+LongAdderBenchmark.incrementDecrement          CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10   619.618 ±   1.734  ops/us
+LongAdderBenchmark.incrementDecrement        CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10   620.444 ±   1.011  ops/us
+LongAdderBenchmark.incrementDecrementGet                        ATOMIC_INTEGER  thrpt   10     6.507 ±   0.090  ops/us
+LongAdderBenchmark.incrementDecrementGet                           ATOMIC_LONG  thrpt   10     6.412 ±   0.074  ops/us
+LongAdderBenchmark.incrementDecrementGet                            LONG_ADDER  thrpt   10    29.544 ±   0.156  ops/us
+LongAdderBenchmark.incrementDecrementGet       CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10   617.852 ±   1.478  ops/us
+LongAdderBenchmark.incrementDecrementGet     CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10   618.374 ±   0.965  ops/us
+LongAdderBenchmark.incrementGetDecrementGet                     ATOMIC_INTEGER  thrpt   10     6.035 ±   0.658  ops/us
+LongAdderBenchmark.incrementGetDecrementGet                        ATOMIC_LONG  thrpt   10     6.502 ±   0.054  ops/us
+LongAdderBenchmark.incrementGetDecrementGet                         LONG_ADDER  thrpt   10    16.269 ±   0.047  ops/us
+LongAdderBenchmark.incrementGetDecrementGet    CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10   614.965 ±   1.106  ops/us
+LongAdderBenchmark.incrementGetDecrementGet  CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10   614.511 ±   1.104  ops/us
+LongAdderBenchmark.incrementOnly                                ATOMIC_INTEGER  thrpt   10    12.781 ±   0.060  ops/us
+LongAdderBenchmark.incrementOnly                                   ATOMIC_LONG  thrpt   10    12.861 ±   0.184  ops/us
+LongAdderBenchmark.incrementOnly                                    LONG_ADDER  thrpt   10  1258.790 ±   2.289  ops/us
+LongAdderBenchmark.incrementOnly               CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10  1259.093 ±   1.934  ops/us
+LongAdderBenchmark.incrementOnly             CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10  1258.051 ±   2.741  ops/us
 
 ```
 
