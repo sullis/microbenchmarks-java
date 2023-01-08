@@ -20,7 +20,9 @@ public class LongAdderBenchmark {
         ATOMIC_INTEGER(new AtomicIntegerCounter()),
         ATOMIC_LONG(new AtomicLongCounter()),
         LONG_ADDER(new LongAdderCounter()),
-        CACHED_LONG_ADDER_COUNTER(new CachedLongAdderCounter());
+        CACHED_LONG_ADDER_COUNTER_100_MS(new CachedLongAdderCounter(100)),
+        CACHED_LONG_ADDER_COUNTER_500_MS(new CachedLongAdderCounter(500)),
+        CACHED_LONG_ADDER_COUNTER_1000_MS(new CachedLongAdderCounter(1000));
 
         private final Counter counter;
 
