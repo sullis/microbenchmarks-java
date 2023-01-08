@@ -1,14 +1,16 @@
 package io.github.sullis.microbenchmarks;
 
+import java.time.Duration;
 import java.util.concurrent.locks.LockSupport;
 
 public class CachedLongAdderCounter extends LongAdderCounter {
     private volatile long snapshotValue = 0;
     private final Thread updater;
 
-    public CachedLongAdderCounter(final long updateIntervalMillis) {
-        if (updateIntervalMillis < 1) {
-            throw new IllegalArgumentException("updateIntervalMillis=" + updateIntervalMillis);
+    public CachedLongAdderCounter(final Duration updateDuration) {
+        final long updateDurationNanos = updateDuration.toNanos();
+        if (updateDurationNanos < 1) {
+            throw new IllegalArgumentException("updateDurationNanos=" + updateDurationNanos);
         }
 
         snapshotValue = 0;
@@ -17,7 +19,7 @@ public class CachedLongAdderCounter extends LongAdderCounter {
             public void run() {
                 while (true) {
                     snapshotValue = CachedLongAdderCounter.super.longValue();
-                    LockSupport.parkNanos(1000 * updateIntervalMillis);
+                    LockSupport.parkNanos(updateDurationNanos);
                 }
             }
         };
