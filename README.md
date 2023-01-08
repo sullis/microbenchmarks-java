@@ -10,6 +10,11 @@
 ./gradlew clean :random:jmh
 ```
 
+## Benchmark for UUID generation
+```
+./gradlew clean :uuid:jmh
+```
+
 ## LongAdder microbenchmark results
 
 
