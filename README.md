@@ -15,6 +15,11 @@
 ./gradlew clean :uuid:jmh
 ```
 
+## Benchmark for log4j2 clock
+```
+./gradlew clean :log4j2clock:jmh
+```
+
 ## LongAdder microbenchmark results
 
 
