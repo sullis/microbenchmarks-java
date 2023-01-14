@@ -8,7 +8,6 @@ import org.apache.logging.log4j.core.util.CachedClock;
 import org.apache.logging.log4j.core.util.Clock;
 import org.apache.logging.log4j.core.util.CoarseCachedClock;
 import org.apache.logging.log4j.core.util.SystemClock;
-import net.openhft.chronicle.core.time.UniqueMicroTimeProvider;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -34,8 +33,7 @@ public class Log4j2ClockBenchmark {
     public enum ClockSupplier {
         SYSTEM_CLOCK(SystemClock::new),
         CACHED_CLOCK(CachedClock::instance),
-        COARSE_CACHED_CLOCK(CoarseCachedClock::instance),
-        UNIQUE_MICROTIME_CLOCK(UniqueMicroTimeClock::new);
+        COARSE_CACHED_CLOCK(CoarseCachedClock::instance);
 
         private final Supplier<Clock> supplier;
 
@@ -45,18 +43,6 @@ public class Log4j2ClockBenchmark {
 
         public Clock get() {
             return this.supplier.get();
-        }
-    }
-
-    static class UniqueMicroTimeClock implements Clock {
-        private final UniqueMicroTimeProvider timeProvider;
-        public UniqueMicroTimeClock() {
-            timeProvider = UniqueMicroTimeProvider.INSTANCE;
-        }
-
-        @Override
-        public long currentTimeMillis() {
-            return timeProvider.currentTimeMillis();
         }
     }
 }
