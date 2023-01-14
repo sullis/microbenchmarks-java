@@ -51,7 +51,7 @@ public class Log4j2ClockBenchmark {
     static class UniqueMicroTimeClock implements Clock {
         private final UniqueMicroTimeProvider timeProvider;
         public UniqueMicroTimeClock() {
-            timeProvider = new UniqueMicroTimeProvider();
+            timeProvider = UniqueMicroTimeProvider.INSTANCE;
         }
 
         @Override
