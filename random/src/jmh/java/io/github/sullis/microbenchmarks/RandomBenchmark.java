@@ -6,6 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
+import io.netty.util.internal.PlatformDependent;
+
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -51,9 +53,17 @@ public class RandomBenchmark {
         }
     };
 
+    private static final Supplier<java.util.Random> nettyThreadLocalRandom = new Supplier<Random>() {
+        @Override
+        public Random get() {
+            return io.netty.util.internal.ThreadLocalRandom.current();
+        }
+    };
+
     public enum RandomSupplier {
         JAVA_UTIL_RANDOM(javaUtilRandomSupplier),
-        THREAD_LOCAL_RANDOM(threadLocalRandomSupplier);
+        THREAD_LOCAL_RANDOM(threadLocalRandomSupplier),
+        NETTY_THREAD_LOCAL_RANDOM(nettyThreadLocalRandom);
 
         private final Supplier<java.util.Random> supplier;
 
