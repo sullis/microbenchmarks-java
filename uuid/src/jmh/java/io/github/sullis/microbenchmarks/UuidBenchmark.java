@@ -4,7 +4,9 @@ package io.github.sullis.microbenchmarks;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
+import java.util.SplittableRandom;
 
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.RandomBasedGenerator;
 import com.fasterxml.uuid.impl.TimeBasedGenerator;
@@ -54,6 +56,20 @@ public class UuidBenchmark {
             @Override
             public UUID get() {
                 return generator.generate();
+            }
+        }),
+        DATASTAX_SPLITTABLE_RANDOM_GENERATOR(new Supplier<UUID>() {
+            // Note: instances of SplittableRandom are not thread-safe
+            private static final ThreadLocal<SplittableRandom> threadSplittableRandom =
+                    new ThreadLocal<SplittableRandom>() {
+                        @Override protected SplittableRandom initialValue() {
+                            return new SplittableRandom();
+                        }
+                    };
+
+            @Override
+            public UUID get() {
+                return Uuids.random(threadSplittableRandom.get());
             }
         });
 
