@@ -42,6 +42,17 @@ public class CacheBenchmark {
         bh.consume(valueFromCache);
     }
 
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void putOnly(final Blackhole bh) {
+        final long now = System.currentTimeMillis();
+        final String key = "key" + now;
+        final String value = "value" + now;
+        cache.put(key, value);
+        bh.consume(cache);
+    }
+
     public enum CacheType {
         CAFFEINE_CACHE(CaffeineCache.class),
         GUAVA_CACHE(GuavaCache.class);
