@@ -26,7 +26,6 @@ public class CacheBenchmark {
 
     @Setup
     public void setup() throws Exception {
-        System.out.println("setup: " + this.maxCapacity + ", " + cacheType.clazz.getName());
         Constructor<? extends Cache<String, String>> constructor = cacheType.clazz.getDeclaredConstructor(Integer.TYPE);
         cache = constructor.newInstance(maxCapacity);
     }
