@@ -1,6 +1,7 @@
 
 package io.github.sullis.microbenchmarks;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -58,8 +59,18 @@ public class RandomBenchmark {
         }
     };
 
+    private static final Supplier<java.util.Random> secureRandomSupplier = new Supplier<Random>() {
+        private static final SecureRandom SECURE_RANDOM_INSTANCE = new SecureRandom();
+        @Override
+        public Random get() {
+            return SECURE_RANDOM_INSTANCE;
+        }
+    };
+
     public enum RandomSupplier {
+
         JAVA_UTIL_RANDOM(javaUtilRandomSupplier),
+        JAVA_SECURE_RANDOM(secureRandomSupplier),
         THREAD_LOCAL_RANDOM(threadLocalRandomSupplier),
         NETTY_THREAD_LOCAL_RANDOM(nettyThreadLocalRandom);
 
