@@ -20,6 +20,11 @@
 ./gradlew clean :log4j2clock:jmh
 ```
 
+## Benchmark for Cache (Guava, Caffeine)
+```
+./gradlew clean :cache:jmh
+```
+
 ## LongAdder microbenchmark results
 
 
