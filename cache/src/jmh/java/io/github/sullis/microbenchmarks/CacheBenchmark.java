@@ -26,8 +26,7 @@ public class CacheBenchmark {
 
     @Setup
     public void setup() throws Exception {
-        Constructor<? extends Cache<String, String>> constructor = cacheType.clazz.getDeclaredConstructor(Integer.TYPE);
-        cache = constructor.newInstance(maxCapacity);
+        cache = this.cacheType.newInstance(maxCapacity);
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -63,6 +62,10 @@ public class CacheBenchmark {
             this.clazz = (Class<? extends Cache<String, String>>) clazz;
         }
 
+        public Cache<String, String> newInstance(final int maxCapacity) throws Exception {
+            Constructor<? extends Cache<String, String>> constructor = this.clazz.getDeclaredConstructor(Integer.TYPE);
+            return constructor.newInstance(maxCapacity);
+        }
     }
 
 }
