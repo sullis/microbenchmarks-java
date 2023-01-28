@@ -33,7 +33,8 @@ public class Log4j2ClockBenchmark {
     public enum ClockSupplier {
         SYSTEM_CLOCK(SystemClock::new),
         CACHED_CLOCK(CachedClock::instance),
-        COARSE_CACHED_CLOCK(CoarseCachedClock::instance);
+        COARSE_CACHED_CLOCK(CoarseCachedClock::instance),
+        CONSTANT_CLOCK(ConstantClock::new);
 
         private final Supplier<Clock> supplier;
 
@@ -43,6 +44,14 @@ public class Log4j2ClockBenchmark {
 
         public Clock get() {
             return this.supplier.get();
+        }
+    }
+
+    private static class ConstantClock implements Clock {
+
+        @Override
+        public long currentTimeMillis() {
+            return 0;
         }
     }
 }
