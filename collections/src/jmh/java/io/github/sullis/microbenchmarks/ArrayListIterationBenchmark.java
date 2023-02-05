@@ -19,7 +19,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class ArrayListIterationBenchmark {
     private ArrayList<String> arrayListOfString;
     private String[] arrayOfString;
-    @Param(value = { "100", "1000", "10000"})
+    @Param(value = { "100" })
     private int arraySize;
 
     @Setup
