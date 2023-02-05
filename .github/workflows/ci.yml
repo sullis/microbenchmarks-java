@@ -79,3 +79,15 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
       - name: JMH Cache
         run: ${{ env.GRADLE_COMMAND }} clean :cache:jmh
+
+  zuul:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ env.JDK }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK }}
+          distribution: ${{ env.DISTRIBUTION }}
+      - name: JMH Zuul
+        run: ${{ env.GRADLE_COMMAND }} clean :zuul:jmh
