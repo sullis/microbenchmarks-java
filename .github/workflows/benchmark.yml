@@ -93,5 +93,5 @@ jobs:
         with:
           java-version: ${{ env.JDK }}
           distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH Zuul
+      - name: JMH Collections
         run: ${{ env.GRADLE_COMMAND }} clean :collections:jmh
