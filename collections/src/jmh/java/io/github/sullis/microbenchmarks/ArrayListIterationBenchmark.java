@@ -13,7 +13,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
-import org.apache.commons.lang3.RandomStringUtils;
 
 @State(Scope.Thread)
 public class ArrayListIterationBenchmark {
@@ -37,7 +36,8 @@ public class ArrayListIterationBenchmark {
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void iterateOverArrayListUsingIndex(final Blackhole bh) {
-        for (int i = 0; i < arrayListOfString.size(); i++) {
+        final int size = arrayListOfString.size();
+        for (int i = 0; i < size; i++) {
             bh.consume(arrayListOfString.get(i));
         }
     }
@@ -55,7 +55,8 @@ public class ArrayListIterationBenchmark {
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void iterateOverArrayUsingIndex(final Blackhole bh) {
-        for (int i = 0; i < arrayOfString.length; i++) {
+        final int size = arrayOfString.length;
+        for (int i = 0; i < size; i++) {
             bh.consume(arrayOfString[i]);
         }
     }
