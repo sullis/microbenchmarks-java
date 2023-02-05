@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths-ignore:
@@ -20,7 +19,7 @@ env:
   GRADLE_COMMAND: './gradlew --no-daemon'
 
 jobs:
-  longadder:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,77 +28,5 @@ jobs:
         with:
           java-version: ${{ env.JDK }}
           distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH LongAdder
-        run: ${{ env.GRADLE_COMMAND }} clean :longadder:jmh
-
-  random:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK }}
-          distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH java.util.Random
-        run: ${{ env.GRADLE_COMMAND }} clean :random:jmh
-
-  log4j2clock:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK }}
-          distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH log4j2 clock
-        run: ${{ env.GRADLE_COMMAND }} clean :log4j2clock:jmh
-
-  uuid:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK }}
-          distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH UUID generation
-        run: ${{ env.GRADLE_COMMAND }} clean :uuid:jmh
-
-  cache:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK }}
-          distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH Cache
-        run: ${{ env.GRADLE_COMMAND }} clean :cache:jmh
-
-  zuul:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK }}
-          distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH Zuul
-        run: ${{ env.GRADLE_COMMAND }} clean :zuul:jmh
-
-  collections:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK ${{ env.JDK }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JDK }}
-          distribution: ${{ env.DISTRIBUTION }}
-      - name: JMH Zuul
-        run: ${{ env.GRADLE_COMMAND }} clean :collections:jmh
+      - name: jmhJar
+        run: ${{ env.GRADLE_COMMAND }} clean jmhJar
