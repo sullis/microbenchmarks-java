@@ -20,13 +20,13 @@ public class ArrayListIterationBenchmark {
     private ArrayList<String> arrayListOfString;
     private String[] arrayOfString;
     @Param(value = { "10" })
-    private int arraySize;
+    private int collectionSize;
 
     @Setup
     public void setup() {
-        arrayListOfString = new ArrayList<String>(arraySize);
-        arrayOfString = new String[arraySize];
-        for (int i = 0; i < arraySize; i++) {
+        arrayListOfString = new ArrayList<String>(collectionSize);
+        arrayOfString = new String[collectionSize];
+        for (int i = 0; i < collectionSize; i++) {
             String s = "s" + i;
             arrayOfString[i] = s;
             arrayListOfString.add(s);
