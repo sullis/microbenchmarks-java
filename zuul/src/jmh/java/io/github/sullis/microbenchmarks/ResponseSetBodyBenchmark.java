@@ -15,6 +15,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -28,10 +29,12 @@ public class ResponseSetBodyBenchmark {
     private HttpResponseMessage responseMessage;
     private String body;
     private byte[] bodyByteArray;
+    @Param(value = { "100", "1000", "10000"})
+    private int bodySize;
 
     @Setup
     public void setup() {
-        body = RandomStringUtils.randomAlphabetic(2000);
+        body = RandomStringUtils.randomAlphabetic(bodySize);
         bodyByteArray = body.getBytes(StandardCharsets.UTF_8);
         SessionContext sessionContext = new SessionContext();
         HttpRequestMessage request = new HttpRequestMessageImpl(sessionContext, "http", "GET", "/", new HttpQueryParams(), new Headers(), "127.0.0.1", "http", 8080, "servername");
