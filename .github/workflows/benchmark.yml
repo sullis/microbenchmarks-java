@@ -95,3 +95,15 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
       - name: JMH Collections
         run: ${{ env.GRADLE_COMMAND }} clean :collections:jmh
+
+  strings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ env.JDK }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK }}
+          distribution: ${{ env.DISTRIBUTION }}
+      - name: JMH Strings
+        run: ${{ env.GRADLE_COMMAND }} clean :strings:jmh
