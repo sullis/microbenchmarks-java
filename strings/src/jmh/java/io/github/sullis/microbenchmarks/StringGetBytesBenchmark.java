@@ -36,8 +36,8 @@ public class StringGetBytesBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void baseline(final Blackhole bh) {
-        bh.consume(text);
+    public void emptyStringGetBytes(final Blackhole bh) {
+        bh.consume("".getBytes(StandardCharsets.UTF_8));
     }
 
     private static String makeString(int length) {
