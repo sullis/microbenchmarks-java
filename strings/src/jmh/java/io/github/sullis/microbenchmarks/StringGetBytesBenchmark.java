@@ -17,7 +17,7 @@ import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
 public class StringGetBytesBenchmark {
-    @Param(value = { "10", "1000" })
+    @Param(value = { "0", "10", "1000" })
     private int length;
     private String text;
 
@@ -31,13 +31,6 @@ public class StringGetBytesBenchmark {
     @Benchmark
     public void getBytes(final Blackhole bh) {
         bh.consume(text.getBytes(StandardCharsets.UTF_8));
-    }
-
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    @Benchmark
-    public void emptyStringGetBytes(final Blackhole bh) {
-        bh.consume("".getBytes(StandardCharsets.UTF_8));
     }
 
     private static String makeString(int length) {
