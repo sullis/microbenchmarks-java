@@ -17,7 +17,7 @@ import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
 public class StringGetBytesBenchmark {
-    @Param(value = { "0", "10", "1000" })
+    @Param(value = { "0", "10", "100", "1000", "10000" })
     private int length;
     private String text;
 
