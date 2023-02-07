@@ -29,7 +29,7 @@ public class ResponseSetBodyBenchmark {
     private HttpResponseMessage responseMessage;
     private String body;
     private byte[] bodyByteArray;
-    @Param(value = { "100", "1000", "10000", "100000"})
+    @Param(value = { "0", "100", "1000", "10000", "100000"})
     private int bodySize;
 
     @Setup
