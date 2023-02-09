@@ -107,3 +107,15 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
       - name: JMH Strings
         run: ${{ env.GRADLE_COMMAND }} clean :strings:jmh
+
+  jackson:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ env.JDK }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK }}
+          distribution: ${{ env.DISTRIBUTION }}
+      - name: JMH Jackson
+        run: ${{ env.GRADLE_COMMAND }} clean :jackson:jmh
