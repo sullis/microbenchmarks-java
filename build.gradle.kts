@@ -34,11 +34,11 @@ allprojects {
   }
 }
 
-val microbenchmarkName = providers.systemProperty("microbenchmark").getOrElse("")
+val benchmarkName = providers.systemProperty("benchmark").getOrElse("")
 
 jmh {
     fork.set(2)
-    includes.set(listOf(microbenchmarkName))
+    includes.set(listOf(benchmarkName))
     iterations.set(5)
     warmupIterations.set(2)
     threads.set(32)
