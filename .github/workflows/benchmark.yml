@@ -23,16 +23,15 @@ jobs:
         with:
           java-version: ${{ env.JDK }}
           distribution: ${{ env.DISTRIBUTION }}
-      - run: ./gradlew -q benchmarkJson
       - id: set-matrix
         run: echo "::set-output name=matrix::`./gradlew -q benchmarkJson`"
   benchmark:
-    name:  ${{ matrix.microbenchmark }}
     runs-on: ubuntu-latest
     needs: setup
     strategy:
       matrix:
         microbenchmark: ${{fromJSON(needs.setup.outputs.matrix)}}
+    name:  ${{ matrix.microbenchmark }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK ${{ env.JDK }}
