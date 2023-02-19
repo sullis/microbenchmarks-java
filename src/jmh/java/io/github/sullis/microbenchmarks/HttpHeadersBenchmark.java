@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class HttpHeadersBenchmark {
 
-    @Param(value = { "1" })
+    @Param(value = { "1", "100" })
     private int numHeaders;
     private String[] headerNames;
     private String[] headerValues;
@@ -39,8 +39,10 @@ public class HttpHeadersBenchmark {
     @Benchmark
     public void zuulHttpHeaders(final Blackhole bh) {
         Headers headers = new Headers();
-        headers.add("a", "b");
-        bh.consume(headers.contains("a"));
+        for (int i = 0; i < numHeaders; i++) {
+            headers.add(headerNames[i], headerValues[i]);
+        }
+        bh.consume(headers.contains(headerNames[0]));
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -48,8 +50,10 @@ public class HttpHeadersBenchmark {
     @Benchmark
     public void nettyHttpHeaders(final Blackhole bh) {
         DefaultHttpHeaders headers = new DefaultHttpHeaders();
-        headers.add("a", "b");
-        bh.consume(headers.contains("a"));
+        for (int i = 0; i < numHeaders; i++) {
+            headers.add(headerNames[i], headerValues[i]);
+        }
+        bh.consume(headers.contains(headerNames[0]));
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -57,7 +61,9 @@ public class HttpHeadersBenchmark {
     @Benchmark
     public void nettyHttp2Headers(final Blackhole bh) {
         DefaultHttp2Headers headers = new DefaultHttp2Headers();
-        headers.add("a", "b");
-        bh.consume(headers.contains("a"));
+        for (int i = 0; i < numHeaders; i++) {
+            headers.add(headerNames[i], headerValues[i]);
+        }
+        bh.consume(headers.contains(headerNames[0]));
     }
 }
