@@ -2,6 +2,7 @@ rootProject.name = "microbenchmarks-java"
 
 include("cache")
 include("collections")
+include("httpheaders")
 include("jackson")
 include("random")
 include("log4j2clock")
