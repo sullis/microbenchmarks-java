@@ -119,3 +119,15 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
       - name: JMH Jackson
         run: ${{ env.GRADLE_COMMAND }} clean :jackson:jmh
+
+  slf4j:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ env.JDK }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JDK }}
+          distribution: ${{ env.DISTRIBUTION }}
+      - name: JMH slf4j
+        run: ${{ env.GRADLE_COMMAND }} clean :slf4j:jmh
