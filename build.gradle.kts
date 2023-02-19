@@ -36,6 +36,7 @@ allprojects {
 
 jmh {
     fork.set(2)
+    includes.set(listOf(providers.systemProperty("microbenchmark").get()))
     iterations.set(5)
     warmupIterations.set(2)
     threads.set(32)

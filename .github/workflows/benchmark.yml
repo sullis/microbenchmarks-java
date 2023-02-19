@@ -40,4 +40,4 @@ jobs:
           java-version: ${{ env.JDK }}
           distribution: ${{ env.DISTRIBUTION }}
       - name: JMH
-        run: ${{ env.GRADLE_COMMAND }} clean jmh
+        run: ${{ env.GRADLE_COMMAND }} clean jmh -Dmicrobenchmark=${{ matrix.microbenchmark }}
