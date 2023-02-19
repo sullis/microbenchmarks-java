@@ -34,15 +34,27 @@ allprojects {
   }
 }
 
-subprojects {
-  apply(plugin = "me.champeau.jmh")
-
-  jmh {
+jmh {
     fork.set(2)
     iterations.set(5)
     warmupIterations.set(2)
     threads.set(32)
     failOnError.set(true)
     jmhVersion.set("1.36")
-  }
+}
+
+dependencies {
+    jmh("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+    jmh("com.google.guava:guava:31.1-jre")
+    jmh("com.github.ben-manes.caffeine:caffeine:3.1.2")
+    jmh("org.apache.commons:commons-lang3:3.12.0")
+    jmh("com.netflix.zuul:zuul-core:2.3.0")
+    jmh("io.netty:netty-codec-http:4.1.89.Final")
+    jmh("io.netty:netty-codec-http2:4.1.89.Final")
+    jmh("io.netty:netty-common:4.1.89.Final")
+    jmh("org.apache.logging.log4j:log4j-core:2.19.0")
+    jmh("org.slf4j:slf4j-api:1.7.36")
+    jmh("com.netflix.netflix-commons:netflix-commons-util:0.3.0")
+    jmh("com.fasterxml.uuid:java-uuid-generator:4.0.1")
+    jmh("com.datastax.oss:java-driver-core:4.15.0")
 }
