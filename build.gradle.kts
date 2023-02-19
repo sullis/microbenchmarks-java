@@ -1,3 +1,5 @@
+import mbjava.MbUtils
+
 plugins {
     `java`
     id("me.champeau.jmh") version "0.6.8"
@@ -19,6 +21,11 @@ java {
         languageVersion.set(JavaLanguageVersion.of(17))
         vendor.set(JvmVendorSpec.AZUL)
     }
+}
+
+tasks.register("benchmarkJson") {
+    val json = MbUtils.benchmarksJson()
+    System.out.println(json);
 }
 
 allprojects {
