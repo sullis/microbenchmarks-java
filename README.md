@@ -5,6 +5,11 @@
 ./gradlew clean jmh
 ```
 
+## Run LongAdder benchmark
+```
+./gradlew clean jmh -Dbenchmark=LongAdderBenchmark
+```
+
 
 ## LongAdder microbenchmark results
 
