@@ -22,7 +22,7 @@ jobs:
   benchmark:
     name:  ${{ matrix.microbenchmark }}
     runs-on: ubuntu-latest
-    needs: setup-benchmark-matrix
+    needs: setup
     strategy:
       matrix:
         microbenchmark: ${{fromJSON(needs.setup.outputs.matrix)}}
