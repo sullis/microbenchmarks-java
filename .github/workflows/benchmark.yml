@@ -10,11 +10,10 @@ env:
   JDK: '17'
   DISTRIBUTION: 'zulu'
   GRADLE_COMMAND: './gradlew --no-daemon'
-  OS: 'ubuntu-latest'
 
 jobs:
   setup:
-    runs-on: ${{ env.OS }}
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -22,7 +21,7 @@ jobs:
         run: echo "::set-output name=matrix::`./gradlew -q benchmarkJson"
   benchmark:
     name:  ${{ matrix.microbenchmark }}
-    runs-on: ${{ env.OS }}
+    runs-on: ubuntu-latest
     needs: setup-benchmark-matrix
     strategy:
       matrix:
