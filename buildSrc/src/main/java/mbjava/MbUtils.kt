@@ -9,7 +9,8 @@ import java.nio.file.Path
 
 class MbUtils {
     companion object {
-        val mapper = jacksonObjectMapper()
+        private val mapper = jacksonObjectMapper()
+
         fun benchmarksJson(): String {
             val files = Files.walk(Path.of("."))
                 .filter(Files::isRegularFile)
