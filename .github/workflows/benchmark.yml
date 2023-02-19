@@ -17,8 +17,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - id: print json
-        run: ./gradlew -q benchmarkJson
+      - run: ./gradlew -q benchmarkJson
       - id: set-matrix
         run: echo "::set-output name=matrix::`./gradlew -q benchmarkJson`"
   benchmark:
