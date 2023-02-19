@@ -1,29 +1,10 @@
 # microbenchmarks-java
 
-## Benchmark for Java's LongAdder
+## Run all benchmarks
 ```
-./gradlew clean :longadder:jmh
-```
-
-## Benchmark for java.util.Random
-```
-./gradlew clean :random:jmh
+./gradlew clean jmh
 ```
 
-## Benchmark for UUID generation
-```
-./gradlew clean :uuid:jmh
-```
-
-## Benchmark for log4j2 clock
-```
-./gradlew clean :log4j2clock:jmh
-```
-
-## Benchmark for Cache (Guava, Caffeine)
-```
-./gradlew clean :cache:jmh
-```
 
 ## LongAdder microbenchmark results
 
