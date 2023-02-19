@@ -4,6 +4,8 @@ package io.github.sullis.microbenchmarks;
 import java.lang.reflect.Constructor;
 import java.util.concurrent.TimeUnit;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.google.common.cache.CacheBuilder;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -68,4 +70,51 @@ public class CacheBenchmark {
         }
     }
 
+    public static interface Cache<K, V> {
+      void put(K key, V value);
+      V get(K key);
+    }
+
+    public static class CaffeineCache<K, V> implements Cache<K, V> {
+        private final com.github.benmanes.caffeine.cache.Cache<K, V> cache;
+
+        public CaffeineCache(int maxSize) {
+            cache = Caffeine.newBuilder()
+                    .initialCapacity(maxSize)
+                    .maximumSize(maxSize)
+                    .build();
+        }
+
+        @Override
+        public void put(K key, V value) {
+            cache.put(key, value);
+        }
+
+        @Override
+        public V get(K key) {
+            return cache.getIfPresent(key);
+        }
+
+    }
+
+    public static class GuavaCache<K, V> implements Cache<K, V> {
+        private final com.google.common.cache.Cache<K, V> cache;
+
+        public GuavaCache(final int maxSize) {
+            cache = CacheBuilder.newBuilder()
+                        .initialCapacity(maxSize)
+                        .maximumSize(maxSize)
+                        .build();
+        }
+
+        @Override
+        public void put(K key, V value) {
+            cache.put(key, value);
+        }
+
+        @Override
+        public V get(K key) {
+            return cache.getIfPresent(key);
+        }
+    }
 }
