@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class BrotliEncoderParameterBenchmark {
 
-    @Param(value = {  "4", "11" })
+    @Param(value = {  "1", "4", "11" })
     private int quality;
     @Param(value = { "10000" })
     private int size;
