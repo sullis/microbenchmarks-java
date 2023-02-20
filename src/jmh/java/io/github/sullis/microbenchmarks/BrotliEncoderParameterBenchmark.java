@@ -37,7 +37,7 @@ public class BrotliEncoderParameterBenchmark {
         Brotli4jLoader.ensureAvailability();
         text = RandomStringUtils.random(size, "ab");
         textBytes = text.getBytes(StandardCharsets.UTF_8);
-        baos = new ByteArrayOutputStream(size * 2);
+        baos = new ByteArrayOutputStream(size);
         encoderParameters = new Encoder.Parameters();
         encoderParameters.setMode(Encoder.Mode.TEXT);
         encoderParameters.setQuality(quality);
