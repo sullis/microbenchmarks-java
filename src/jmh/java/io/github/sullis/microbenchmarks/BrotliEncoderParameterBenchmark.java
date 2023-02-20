@@ -46,6 +46,7 @@ public class BrotliEncoderParameterBenchmark {
     @TearDown
     public void teardown() throws Exception {
         if (baos != null) {
+            System.out.println("baos.size: " + baos.size());
             baos.close();
             baos = null;
         }
