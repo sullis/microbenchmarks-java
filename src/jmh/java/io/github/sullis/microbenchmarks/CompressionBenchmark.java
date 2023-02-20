@@ -48,6 +48,7 @@ public class CompressionBenchmark {
         CompressionOps ops = this.compressionType.supplier.get();
         ops.compress(textBytes, baos);
         bh.consume(baos);
+        bh.consume(ops);
     }
 
     public enum CompressionType {
@@ -63,7 +64,6 @@ public class CompressionBenchmark {
                         gzip.write(data);
                         gzip.flush();
                         gzip.close();
-
                     }
                 };
             }
