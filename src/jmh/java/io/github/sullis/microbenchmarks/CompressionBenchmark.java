@@ -27,7 +27,7 @@ public class CompressionBenchmark {
 
     @Param
     private CompressionType compressionType;
-    @Param(value = { "1000", "100000" })
+    @Param(value = { "100000" })
     private int size;
     private String text;
     private byte[] textBytes;
