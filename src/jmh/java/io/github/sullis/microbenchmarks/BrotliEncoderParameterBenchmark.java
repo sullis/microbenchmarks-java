@@ -25,7 +25,7 @@ public class BrotliEncoderParameterBenchmark {
 
     @Param(value = {  "4", "11" })
     private int quality;
-    @Param(value = { "100000" })
+    @Param(value = { "10000" })
     private int size;
     private String text;
     private byte[] textBytes;
