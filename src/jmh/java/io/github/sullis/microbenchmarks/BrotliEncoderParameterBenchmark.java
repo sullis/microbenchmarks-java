@@ -13,7 +13,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.io.ByteArrayOutputStream;
@@ -29,7 +28,6 @@ public class BrotliEncoderParameterBenchmark {
     private int size;
     private String text;
     private byte[] textBytes;
-    private ByteArrayOutputStream baos;
     private Encoder.Parameters encoderParameters;
 
     @Setup
@@ -37,29 +35,22 @@ public class BrotliEncoderParameterBenchmark {
         Brotli4jLoader.ensureAvailability();
         text = RandomStringUtils.random(size, "ab");
         textBytes = text.getBytes(StandardCharsets.UTF_8);
-        baos = new ByteArrayOutputStream(size);
         encoderParameters = new Encoder.Parameters();
         encoderParameters.setMode(Encoder.Mode.TEXT);
         encoderParameters.setQuality(quality);
-    }
-
-    @TearDown
-    public void teardown() throws Exception {
-        if (baos != null) {
-            System.out.println("baos.size: " + baos.size());
-            baos.close();
-            baos = null;
-        }
     }
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
     public void compress(final Blackhole bh) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
         BrotliOutputStream brotli = new BrotliOutputStream(baos, encoderParameters);
         brotli.write(textBytes);
         brotli.flush();
         brotli.close();
+        baos.close();
+        bh.consume(brotli);
     }
 
 }
