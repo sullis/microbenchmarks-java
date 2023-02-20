@@ -13,6 +13,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.io.ByteArrayOutputStream;
@@ -36,10 +37,18 @@ public class BrotliEncoderParameterBenchmark {
         Brotli4jLoader.ensureAvailability();
         text = RandomStringUtils.random(size, "ab");
         textBytes = text.getBytes(StandardCharsets.UTF_8);
-        baos = new ByteArrayOutputStream(size);
+        baos = new ByteArrayOutputStream(size * 2);
         encoderParameters = new Encoder.Parameters();
         encoderParameters.setMode(Encoder.Mode.TEXT);
         encoderParameters.setQuality(quality);
+    }
+
+    @TearDown
+    public void teardown() throws Exception {
+        if (baos != null) {
+            baos.close();
+            baos = null;
+        }
     }
 
     @BenchmarkMode(Mode.Throughput)
