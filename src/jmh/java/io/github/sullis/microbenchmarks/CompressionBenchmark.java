@@ -2,6 +2,7 @@
 package io.github.sullis.microbenchmarks;
 
 import com.aayushatharva.brotli4j.Brotli4jLoader;
+import io.netty.handler.codec.compression.StandardCompressionOptions;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -31,20 +32,19 @@ public class CompressionBenchmark {
     private int size;
     private String text;
     private byte[] textBytes;
-    private ByteArrayOutputStream baos;
 
     @Setup
     public void setup() {
         Brotli4jLoader.ensureAvailability();
         text = RandomStringUtils.random(size, "ab");
         textBytes = text.getBytes(StandardCharsets.UTF_8);
-        baos = new ByteArrayOutputStream(size);
     }
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
     public void compress(final Blackhole bh) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
         CompressionOps ops = this.compressionType.supplier.get();
         ops.compress(textBytes, baos);
         bh.consume(baos);
@@ -75,7 +75,7 @@ public class CompressionBenchmark {
 
                     @Override
                     public void compress(byte[] data, OutputStream out) throws IOException {
-                        BrotliOutputStream brotli = new BrotliOutputStream(out);
+                        BrotliOutputStream brotli = new BrotliOutputStream(out, StandardCompressionOptions.brotli().parameters());
                         brotli.write(data);
                         brotli.flush();
                         brotli.close();
