@@ -46,7 +46,7 @@ jmh {
     jmhVersion.set("1.36")
 }
 
-val brotli4jVersion = "1.10.0"
+val brotli4jVersion = "1.11.0"
 
 dependencies {
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.2")
