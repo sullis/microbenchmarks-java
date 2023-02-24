@@ -2,7 +2,7 @@ import mbjava.MbUtils
 
 plugins {
     `java`
-    id("me.champeau.jmh") version "0.6.8"
+    id("me.champeau.jmh") version "0.7.0"
 }
 
 testing {
