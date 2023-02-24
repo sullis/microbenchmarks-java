@@ -47,6 +47,7 @@ jmh {
 }
 
 val brotli4jVersion = "1.11.0"
+val nettyVersion = "4.1.89.Final"
 
 dependencies {
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.2")
@@ -54,9 +55,9 @@ dependencies {
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.2")
     jmh("org.apache.commons:commons-lang3:3.12.0")
     jmh("com.netflix.zuul:zuul-core:2.3.0")
-    jmh("io.netty:netty-codec-http:4.1.89.Final")
-    jmh("io.netty:netty-codec-http2:4.1.89.Final")
-    jmh("io.netty:netty-common:4.1.89.Final")
+    jmh("io.netty:netty-codec-http:$nettyVersion")
+    jmh("io.netty:netty-codec-http2:$nettyVersion")
+    jmh("io.netty:netty-common:$nettyVersion")
     jmh("org.apache.logging.log4j:log4j-core:2.19.0")
     jmh("org.slf4j:slf4j-api:1.7.36")
     jmh("com.netflix.netflix-commons:netflix-commons-util:0.3.0")
