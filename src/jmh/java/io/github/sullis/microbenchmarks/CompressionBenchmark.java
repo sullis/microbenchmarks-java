@@ -99,10 +99,10 @@ public class CompressionBenchmark {
                    return new CompressionOps() {
 
                        @Override
-                       public void compress( byte[] data, OutputStream out) throws IOException {
+                       public void compress(final byte[] data, final OutputStream out) throws IOException {
                            Encoder.Parameters params = StandardCompressionOptions.brotli().parameters();
                            params.setQuality(quality);
-                           BrotliHelper.compress(StandardCompressionOptions.brotli().parameters(), data, out);
+                           BrotliHelper.compress(params, data, out);
                        }
                    };
                }
