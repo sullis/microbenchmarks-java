@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class HttpHeadersBenchmark {
 
-    @Param(value = { "1", "100" })
+    @Param(value = { "100" })
     private int numHeaders;
     private String[] headerNames;
     private String[] headerValues;
