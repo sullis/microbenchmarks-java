@@ -2,6 +2,7 @@
 package io.github.sullis.microbenchmarks;
 
 import com.aayushatharva.brotli4j.Brotli4jLoader;
+import com.aayushatharva.brotli4j.encoder.Encoder;
 import io.netty.handler.codec.compression.StandardCompressionOptions;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -68,21 +69,9 @@ public class CompressionBenchmark {
                 };
             }
         }),
-        BROTLI(new Supplier<CompressionOps>() {
-            @Override
-            public CompressionOps get() {
-                return new CompressionOps() {
-
-                    @Override
-                    public void compress(byte[] data, OutputStream out) throws IOException {
-                        BrotliOutputStream brotli = new BrotliOutputStream(out, StandardCompressionOptions.brotli().parameters());
-                        brotli.write(data);
-                        brotli.flush();
-                        brotli.close();
-                    }
-                };
-            }
-        });
+        BROTLI_0(BrotliHelper.brotli(0)),
+        BROTLI_4(BrotliHelper.brotli(4)),
+        BROTLI_11(BrotliHelper.brotli(11));
 
         private final Supplier<CompressionOps> supplier;
 
@@ -98,5 +87,35 @@ public class CompressionBenchmark {
 
     public interface CompressionOps {
         void compress(byte[] data, OutputStream out) throws IOException;
+    }
+
+
+
+    static class BrotliHelper {
+       public static Supplier<CompressionOps> brotli(final int quality) {
+           return new Supplier<CompressionOps>() {
+               @Override
+               public CompressionOps get() {
+                   return new CompressionOps() {
+
+                       @Override
+                       public void compress( byte[] data, OutputStream out) throws IOException {
+                           Encoder.Parameters params = StandardCompressionOptions.brotli().parameters();
+                           params.setQuality(quality);
+                           BrotliHelper.compress(StandardCompressionOptions.brotli().parameters(), data, out);
+                       }
+                   };
+               }
+           };
+       }
+
+        public static void compress(final Encoder.Parameters encoderParameters,
+                                    final byte[] data,
+                                    final OutputStream out) throws IOException {
+            BrotliOutputStream brotli = new BrotliOutputStream(out, encoderParameters);
+            brotli.write(data);
+            brotli.flush();
+            brotli.close();
+        }
     }
 }
