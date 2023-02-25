@@ -66,4 +66,15 @@ public class HttpHeadersBenchmark {
         }
         bh.consume(headers.contains(headerNames[0]));
     }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    public void springHttpHeaders(final Blackhole bh) {
+        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        for (int i = 0; i < numHeaders; i++) {
+            headers.add(headerNames[i], headerValues[i]);
+        }
+        bh.consume(headers.containsKey(headerNames[0]));
+    }
 }

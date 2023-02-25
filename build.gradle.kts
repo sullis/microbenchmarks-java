@@ -50,6 +50,7 @@ val brotli4jVersion = "1.11.0"
 val nettyVersion = "4.1.89.Final"
 
 dependencies {
+    jmh("org.springframework:spring-web:6.0.5")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.2")
     jmh("com.google.guava:guava:31.1-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.2")
