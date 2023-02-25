@@ -69,9 +69,9 @@ public class CompressionBenchmark {
                 };
             }
         }),
-        BROTLI_0(BrotliHelper.brotli(0)),
-        BROTLI_4(BrotliHelper.brotli(4)),
-        BROTLI_11(BrotliHelper.brotli(11));
+        BROTLI_0(Brotli4jHelper.brotli(0)),
+        BROTLI_4(Brotli4jHelper.brotli(4)),
+        BROTLI_11(Brotli4jHelper.brotli(11));
 
         private final Supplier<CompressionOps> supplier;
 
@@ -91,8 +91,10 @@ public class CompressionBenchmark {
 
 
 
-    static class BrotliHelper {
+    static class Brotli4jHelper {
        public static Supplier<CompressionOps> brotli(final int quality) {
+           final Encoder.Parameters params = StandardCompressionOptions.brotli().parameters();
+           params.setQuality(quality);
            return new Supplier<CompressionOps>() {
                @Override
                public CompressionOps get() {
@@ -100,9 +102,7 @@ public class CompressionBenchmark {
 
                        @Override
                        public void compress(final byte[] data, final OutputStream out) throws IOException {
-                           Encoder.Parameters params = StandardCompressionOptions.brotli().parameters();
-                           params.setQuality(quality);
-                           BrotliHelper.compress(params, data, out);
+                           Brotli4jHelper.compress(params, data, out);
                        }
                    };
                }
