@@ -2,7 +2,6 @@
 package io.github.sullis.microbenchmarks;
 
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import com.netflix.zuul.context.SessionContext;
@@ -24,7 +23,7 @@ import com.netflix.zuul.message.http.HttpResponseMessage;
 import org.apache.commons.lang3.RandomStringUtils;
 
 @State(Scope.Thread)
-public class ResponseSetBodyBenchmark {
+public class ZuulResponseSetBodyBenchmark {
 
     private HttpResponseMessage responseMessage;
     private String body;
