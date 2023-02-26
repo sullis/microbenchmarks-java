@@ -93,7 +93,8 @@ public class CompressionBenchmark {
 
     static class Brotli4jHelper {
        public static Supplier<CompressionOps> brotli(final int quality) {
-           final Encoder.Parameters params = StandardCompressionOptions.brotli().parameters();
+           final Encoder.Parameters params = new Encoder.Parameters();
+           params.setMode(Encoder.Mode.TEXT);
            params.setQuality(quality);
            return new Supplier<CompressionOps>() {
                @Override
