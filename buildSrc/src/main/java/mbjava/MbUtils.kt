@@ -16,6 +16,7 @@ class MbUtils {
                 .filter(Files::isRegularFile)
                 .map { it.toFile() }
                 .filter { it.name.endsWith("Benchmark.java") }
+                .filter { !it.name.startsWith("Abstract") }
                 .map { it.nameWithoutExtension }
                 .sorted()
                 .toList()
