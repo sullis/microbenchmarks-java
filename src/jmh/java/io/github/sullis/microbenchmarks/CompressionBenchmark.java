@@ -3,7 +3,6 @@ package io.github.sullis.microbenchmarks;
 
 import com.aayushatharva.brotli4j.Brotli4jLoader;
 import com.aayushatharva.brotli4j.encoder.Encoder;
-import io.netty.handler.codec.compression.StandardCompressionOptions;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
