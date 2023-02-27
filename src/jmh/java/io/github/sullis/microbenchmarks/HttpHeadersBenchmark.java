@@ -42,7 +42,7 @@ public class HttpHeadersBenchmark {
         for (int i = 0; i < numHeaders; i++) {
             headers.add(headerNames[i], headerValues[i]);
         }
-        bh.consume(headers.contains(headerNames[0]));
+        bh.consume(headers);
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -53,7 +53,7 @@ public class HttpHeadersBenchmark {
         for (int i = 0; i < numHeaders; i++) {
             headers.add(headerNames[i], headerValues[i]);
         }
-        bh.consume(headers.contains(headerNames[0]));
+        bh.consume(headers);
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -64,7 +64,7 @@ public class HttpHeadersBenchmark {
         for (int i = 0; i < numHeaders; i++) {
             headers.add(headerNames[i], headerValues[i]);
         }
-        bh.consume(headers.contains(headerNames[0]));
+        bh.consume(headers);
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -75,6 +75,6 @@ public class HttpHeadersBenchmark {
         for (int i = 0; i < numHeaders; i++) {
             headers.add(headerNames[i], headerValues[i]);
         }
-        bh.consume(headers.containsKey(headerNames[0]));
+        bh.consume(headers);
     }
 }
