@@ -1,7 +1,6 @@
 
 package io.github.sullis.microbenchmarks;
 
-import com.netflix.zuul.message.Headers;
 import io.netty.handler.codec.http.DefaultHttpHeaders;
 import io.netty.handler.codec.http2.DefaultHttp2Headers;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -21,11 +20,17 @@ public class HttpHeadersBenchmark {
 
     @Param(value = { "100" })
     private int numHeaders;
+    @Param
+    private HttpHeadersType httpHeadersType;
+
+    private HttpHeaderOps httpHeaders;
+
     private String[] headerNames;
     private String[] headerValues;
 
     @Setup
-    public void setup() {
+    public void setup() throws Exception {
+        httpHeaders = httpHeadersType.newInstance();
         headerNames = new String[numHeaders];
         headerValues = new String[numHeaders];
         for (int i = 0; i < numHeaders; i++) {
@@ -37,44 +42,87 @@ public class HttpHeadersBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
-    public void zuulHttpHeaders(final Blackhole bh) {
-        Headers headers = new Headers();
-        for (int i = 0; i < numHeaders; i++) {
-            headers.add(headerNames[i], headerValues[i]);
+    public void addHeaders(final Blackhole bh) {
+        for (int i = 0; i < headerNames.length; i++) {
+            httpHeaders.addHeader(headerNames[i], headerValues[i]);
         }
-        bh.consume(headers);
+        bh.consume(httpHeaders);
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    @Benchmark
-    public void nettyHttpHeaders(final Blackhole bh) {
-        DefaultHttpHeaders headers = new DefaultHttpHeaders();
-        for (int i = 0; i < numHeaders; i++) {
-            headers.add(headerNames[i], headerValues[i]);
+    public enum HttpHeadersType {
+        NETTY_HTTP1(NettyHttp1.class),
+        NETTY_HTTP2(NettyHttp2.class),
+        ZUUL(ZuulHttp.class),
+        SPRINGWEB(SpringHttp.class);
+
+        private final Class<? extends HttpHeaderOps> clazz;
+
+        HttpHeadersType(Class<? extends HttpHeaderOps> clazz) {
+           this.clazz = clazz;
         }
-        bh.consume(headers);
+
+        public HttpHeaderOps newInstance() throws Exception { return this.clazz.newInstance(); }
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    @Benchmark
-    public void nettyHttp2Headers(final Blackhole bh) {
-        DefaultHttp2Headers headers = new DefaultHttp2Headers();
-        for (int i = 0; i < numHeaders; i++) {
-            headers.add(headerNames[i], headerValues[i]);
-        }
-        bh.consume(headers);
+    interface HttpHeaderOps {
+        public void addHeader(String name, String value);
+        public String getFirst(String name);
     }
 
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MICROSECONDS)
-    @Benchmark
-    public void springHttpHeaders(final Blackhole bh) {
-        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-        for (int i = 0; i < numHeaders; i++) {
-            headers.add(headerNames[i], headerValues[i]);
+    static class NettyHttp1 implements HttpHeaderOps {
+        private final DefaultHttpHeaders headers = new DefaultHttpHeaders();
+
+        @Override
+        public void addHeader(String name, String value) {
+            headers.add(name, value);
         }
-        bh.consume(headers);
+
+        @Override
+        public String getFirst(String name) {
+           return headers.get(name);
+        }
+    }
+
+   static class NettyHttp2 implements HttpHeaderOps {
+       private final DefaultHttp2Headers headers = new DefaultHttp2Headers();
+
+        @Override
+        public void addHeader(String name, String value) {
+            headers.add(name, value);
+        }
+
+        @Override
+        public String getFirst(String name) {
+            CharSequence value = headers.get(name);
+            return (value == null) ? null : value.toString();
+        }
+    }
+
+    static class ZuulHttp implements HttpHeaderOps {
+        private final com.netflix.zuul.message.Headers headers = new com.netflix.zuul.message.Headers();
+
+        @Override
+        public void addHeader(String name, String value) {
+            headers.add(name, value);
+        }
+
+        @Override
+        public String getFirst(String name) {
+            return headers.getFirst(name);
+        }
+    }
+
+    static class SpringHttp implements HttpHeaderOps {
+        private final org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+
+        @Override
+        public void addHeader(String name, String value) {
+            headers.add(name, value);
+        }
+
+        @Override
+        public String getFirst(String name) {
+            return headers.getFirst(name);
+        }
     }
 }
