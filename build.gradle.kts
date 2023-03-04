@@ -41,7 +41,6 @@ jmh {
     includes.set(listOf(benchmarkName))
     iterations.set(5)
     warmupIterations.set(2)
-    threads.set(32)
     failOnError.set(true)
     jmhVersion.set("1.36")
 }
