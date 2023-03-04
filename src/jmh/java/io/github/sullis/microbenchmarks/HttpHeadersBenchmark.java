@@ -31,7 +31,6 @@ public class HttpHeadersBenchmark {
 
     @Setup
     public void setup() throws Exception {
-        httpHeaders = httpHeadersType.newInstance();
         headerNames = new String[numHeaders];
         headerValues = new String[numHeaders];
         for (int i = 0; i < numHeaders; i++) {
@@ -44,7 +43,8 @@ public class HttpHeadersBenchmark {
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Threads(1)
     @Benchmark
-    public void addHeaders(final Blackhole bh) {
+    public void addHeaders(final Blackhole bh) throws Exception {
+        httpHeaders = httpHeadersType.newInstance();
         httpHeaders.addHeader(headerNames[0], headerValues[0]);
         bh.consume(httpHeaders);
     }
