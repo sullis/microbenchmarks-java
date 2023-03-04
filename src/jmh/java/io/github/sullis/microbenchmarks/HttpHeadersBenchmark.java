@@ -52,8 +52,8 @@ public class HttpHeadersBenchmark {
     public enum HttpHeadersType {
         NETTY_HTTP1(NettyHttp1.class),
         NETTY_HTTP2(NettyHttp2.class),
-        SPRINGWEB(SpringHttp.class);
-        // ZUUL(ZuulHttp.class);
+        SPRINGWEB(SpringHttp.class),
+        ZUUL(ZuulHttp.class);
 
         private final Class<? extends HttpHeaderOps> clazz;
 
