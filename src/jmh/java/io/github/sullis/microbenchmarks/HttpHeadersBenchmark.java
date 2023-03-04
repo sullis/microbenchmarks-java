@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class HttpHeadersBenchmark {
 
-    @Param(value = { "1" })
+    @Param(value = { "10" })
     private int numHeaders;
     @Param
     private HttpHeadersType httpHeadersType;
@@ -45,7 +45,9 @@ public class HttpHeadersBenchmark {
     @Benchmark
     public void addHeaders(final Blackhole bh) throws Exception {
         httpHeaders = httpHeadersType.newInstance();
-        httpHeaders.addHeader(headerNames[0], headerValues[0]);
+        for (int i = 0; i < headerNames.length; i++) {
+            httpHeaders.addHeader(headerNames[i], headerValues[i]);
+        }
         bh.consume(httpHeaders);
     }
 
