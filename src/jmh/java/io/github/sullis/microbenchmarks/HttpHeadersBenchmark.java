@@ -11,6 +11,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.concurrent.TimeUnit;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class HttpHeadersBenchmark {
 
-    @Param(value = { "10" })
+    @Param(value = { "1" })
     private int numHeaders;
     @Param
     private HttpHeadersType httpHeadersType;
@@ -41,19 +42,18 @@ public class HttpHeadersBenchmark {
 
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Threads(1)
     @Benchmark
     public void addHeaders(final Blackhole bh) {
-        for (int i = 0; i < headerNames.length; i++) {
-            httpHeaders.addHeader(headerNames[i], headerValues[i]);
-        }
+        httpHeaders.addHeader(headerNames[0], headerValues[0]);
         bh.consume(httpHeaders);
     }
 
     public enum HttpHeadersType {
         NETTY_HTTP1(NettyHttp1.class),
         NETTY_HTTP2(NettyHttp2.class),
-        ZUUL(ZuulHttp.class),
         SPRINGWEB(SpringHttp.class);
+        // ZUUL(ZuulHttp.class);
 
         private final Class<? extends HttpHeaderOps> clazz;
 
@@ -61,7 +61,9 @@ public class HttpHeadersBenchmark {
            this.clazz = clazz;
         }
 
-        public HttpHeaderOps newInstance() throws Exception { return this.clazz.newInstance(); }
+        public HttpHeaderOps newInstance() throws Exception {
+            return this.clazz.newInstance();
+        }
     }
 
     interface HttpHeaderOps {
