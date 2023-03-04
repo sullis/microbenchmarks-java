@@ -15,11 +15,13 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Thread)
+@Threads(value = Threads.MAX)
 public class LongAdderBenchmark {
     public enum CounterSupplier {
         ATOMIC_INTEGER(new AtomicIntegerCounter()),
