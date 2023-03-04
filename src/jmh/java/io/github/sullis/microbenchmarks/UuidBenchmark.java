@@ -18,9 +18,11 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
+@Threads(value = Threads.MAX)
 public class UuidBenchmark {
     @Param
     private UuidSupplier uuidSupplier;
