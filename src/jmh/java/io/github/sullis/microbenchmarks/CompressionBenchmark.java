@@ -41,7 +41,7 @@ public class CompressionBenchmark {
     }
 
     @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void compress(final Blackhole bh) throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
