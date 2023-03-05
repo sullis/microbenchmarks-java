@@ -39,8 +39,8 @@ public class OffHeapAllocationBenchmark {
     }
 
     public enum OffHeapAllocationType {
-        NETTY4(Netty4Allocation.class);
-        // NETTY5(Netty5Allocation.class);
+        NETTY4(Netty4Allocation.class),
+        NETTY5(Netty5Allocation.class);
 
         private final Class<? extends OffHeapAllocationOps> clazz;
 
@@ -58,7 +58,7 @@ public class OffHeapAllocationBenchmark {
         void releaseBuffer(Object obj);
     }
 
-    class Netty4Allocation implements OffHeapAllocationOps {
+    static public class Netty4Allocation implements OffHeapAllocationOps {
         private final io.netty.buffer.ByteBufAllocator alloc = io.netty.buffer.PooledByteBufAllocator.DEFAULT;
 
         public Netty4Allocation() { }
@@ -74,7 +74,7 @@ public class OffHeapAllocationBenchmark {
         }
     }
 
-    class Netty5Allocation implements OffHeapAllocationOps {
+    static public class Netty5Allocation implements OffHeapAllocationOps {
         private final io.netty5.buffer.BufferAllocator alloc = io.netty5.buffer.DefaultBufferAllocators.offHeapAllocator();
 
         public Netty5Allocation() { }
