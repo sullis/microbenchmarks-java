@@ -15,9 +15,9 @@ import org.openjdk.jmh.infra.Blackhole;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
-@Threads(value = Threads.MAX)
+@Threads(1)
 public class OffHeapAllocationBenchmark {
-    @Param(value = "1024")
+    @Param(value = "16")
     private int bufferSize;
 
     @Param
