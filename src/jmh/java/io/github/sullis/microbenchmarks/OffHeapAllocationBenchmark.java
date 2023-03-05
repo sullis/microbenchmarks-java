@@ -39,8 +39,8 @@ public class OffHeapAllocationBenchmark {
     }
 
     public enum OffHeapAllocationType {
-        NETTY4(Netty4Allocation.class),
-        NETTY5(Netty5Allocation.class);
+        NETTY4(Netty4Allocation.class);
+        // NETTY5(Netty5Allocation.class);
 
         private final Class<? extends OffHeapAllocationOps> clazz;
 
