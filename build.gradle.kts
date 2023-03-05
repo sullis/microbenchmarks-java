@@ -47,6 +47,7 @@ jmh {
 
 val brotli4jVersion = "1.11.0"
 val nettyVersion = "4.1.89.Final"
+val netty5Version = "5.0.0.Alpha5"
 
 dependencies {
     jmh("org.springframework:spring-web:6.0.5")
@@ -58,6 +59,7 @@ dependencies {
     jmh("io.netty:netty-codec-http:$nettyVersion")
     jmh("io.netty:netty-codec-http2:$nettyVersion")
     jmh("io.netty:netty-common:$nettyVersion")
+    jmh("io.netty:netty5-common:$netty5Version")
     jmh("org.apache.logging.log4j:log4j-core:2.20.0")
     jmh("org.slf4j:slf4j-api:1.7.36")
     jmh("com.netflix.netflix-commons:netflix-commons-util:0.3.0")
