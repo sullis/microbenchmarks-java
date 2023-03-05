@@ -31,6 +31,13 @@ tasks.register("benchmarkJson") {
 allprojects {
   repositories {
     mavenCentral()
+    maven {
+        url = uri("https://artifacts-oss.netflix.net/artifactory/maven-oss-snapshots")
+        mavenContent {
+            includeGroup("com.netflix.zuul")
+            snapshotsOnly()
+        }
+    }
   }
 }
 
@@ -48,6 +55,7 @@ jmh {
 val brotli4jVersion = "1.11.0"
 val nettyVersion = "4.1.89.Final"
 val netty5Version = "5.0.0.Alpha5"
+val zuulOssVersion = "2.3.1-SNAPSHOT"
 
 dependencies {
     jmh("org.springframework:spring-web:6.0.5")
@@ -55,7 +63,7 @@ dependencies {
     jmh("com.google.guava:guava:31.1-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.2")
     jmh("org.apache.commons:commons-lang3:3.12.0")
-    jmh("com.netflix.zuul:zuul-core:2.3.0")
+    jmh("com.netflix.zuul:zuul-core:$zuulOssVersion")
     jmh("io.netty:netty-codec-http:$nettyVersion")
     jmh("io.netty:netty-codec-http2:$nettyVersion")
     jmh("io.netty:netty-common:$nettyVersion")
