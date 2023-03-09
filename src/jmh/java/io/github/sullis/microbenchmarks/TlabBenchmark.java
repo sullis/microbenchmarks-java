@@ -21,7 +21,7 @@ public class TlabBenchmark {
     @Benchmark
     @Threads(1)
     @Fork(jvmArgs = "-XX:+UseTLAB")
-    public void tlabOneObjectOneThread(final Blackhole bh) {
+    public void tlabOneObject(final Blackhole bh) {
         bh.consume(new Object());
     }
 
@@ -30,7 +30,38 @@ public class TlabBenchmark {
     @Benchmark
     @Threads(1)
     @Fork(jvmArgs = "-XX:-UseTLAB")
-    public void noTlabOneObjectOneThread(final Blackhole bh) {
+    public void noTlabOneObject(final Blackhole bh) {
         bh.consume(new Object());
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    @Threads(1)
+    @Fork(jvmArgs = "-XX:+UseTLAB")
+    public void tlabOneEnumValuesArray(final Blackhole bh) {
+        bh.consume(Fruit.values());
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    @Threads(1)
+    @Fork(jvmArgs = "-XX:-UseTLAB")
+    public void noTlabOneEnumValuesArray(final Blackhole bh) {
+        bh.consume(Fruit.values());
+    }
+
+    public enum Fruit {
+        APPLE("Apple"),
+        BANANA("Banana"),
+        ORANGE("Orange"),
+        STRAWBERRY("Strawberry");
+
+        private String id;
+        Fruit(String id) {
+           this.id = id;
+        }
+
     }
 }
