@@ -12,6 +12,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +25,7 @@ import java.util.zip.GZIPOutputStream;
 import com.aayushatharva.brotli4j.encoder.BrotliOutputStream;
 
 @State(Scope.Thread)
+@Threads(1)
 public class CompressionBenchmark {
 
     @Param
