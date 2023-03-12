@@ -30,14 +30,12 @@ public class CompressionBenchmark {
     private CompressionType compressionType;
     @Param(value = { "100000" })
     private int size;
-    private String text;
     private byte[] textBytes;
 
     @Setup
     public void setup() {
         Brotli4jLoader.ensureAvailability();
-        text = RandomStringUtils.random(size, "ab");
-        textBytes = text.getBytes(StandardCharsets.UTF_8);
+        textBytes = RandomStringUtils.random(size, "ab").getBytes(StandardCharsets.UTF_8);
     }
 
     @BenchmarkMode(Mode.Throughput)
