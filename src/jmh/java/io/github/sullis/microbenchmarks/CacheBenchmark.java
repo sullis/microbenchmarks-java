@@ -17,6 +17,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
+@Threads(value = Threads.MAX)
 public class CacheBenchmark {
     @Param
     private CacheType cacheType;
