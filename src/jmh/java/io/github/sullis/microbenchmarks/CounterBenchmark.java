@@ -22,7 +22,7 @@ import org.openjdk.jmh.infra.Blackhole;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Thread)
 @Threads(value = Threads.MAX)
-public class LongAdderBenchmark {
+public class CounterBenchmark {
     public enum CounterSupplier {
         ATOMIC_INTEGER(new AtomicIntegerCounter()),
         ATOMIC_LONG(new AtomicLongCounter()),
