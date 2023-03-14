@@ -28,7 +28,7 @@ public class ZuulResponseSetBodyBenchmark {
     private HttpResponseMessage responseMessage;
     private String body;
     private byte[] bodyByteArray;
-    @Param(value = { "1000" })
+    @Param(value = { "1000, 10000" })
     private int bodySize;
 
     @Setup
