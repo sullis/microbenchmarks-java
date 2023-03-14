@@ -103,7 +103,11 @@ public class HttpHeadersBenchmark {
     }
 
     static class ZuulHttp implements HttpHeaderOps {
-        private final com.netflix.zuul.message.Headers headers = new com.netflix.zuul.message.Headers();
+        private final com.netflix.zuul.message.Headers headers;
+
+        public ZuulHttp() {
+            headers = new com.netflix.zuul.message.Headers();
+        }
 
         @Override
         public void addHeader(String name, String value) {
