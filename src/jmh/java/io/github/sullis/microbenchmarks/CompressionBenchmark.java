@@ -3,7 +3,9 @@ package io.github.sullis.microbenchmarks;
 
 import com.aayushatharva.brotli4j.Brotli4jLoader;
 import com.aayushatharva.brotli4j.encoder.Encoder;
+import com.google.common.io.Files;
 import com.google.common.io.Resources;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -17,9 +19,11 @@ import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -127,6 +131,7 @@ public class CompressionBenchmark {
 
 
 
+
     static class Brotli4jHelper {
        public static Supplier<CompressionOps> brotli(final int quality) {
            final Encoder.Parameters params = new Encoder.Parameters();
@@ -154,5 +159,19 @@ public class CompressionBenchmark {
             brotli.flush();
             brotli.close();
         }
+    }
+}
+
+class DataFileHelper {
+
+    public static void writeFile(final int size) throws Exception {
+        File file = new File("" + size + ".txt");
+        String data = RandomStringUtils.random(size, "ab");
+        Files.write(data.getBytes(StandardCharsets.UTF_8), file);
+    }
+
+    public static void main(String[] args) throws Exception {
+        writeFile(10000);
+        writeFile(100000);
     }
 }
