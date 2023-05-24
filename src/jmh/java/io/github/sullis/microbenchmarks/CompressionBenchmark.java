@@ -4,6 +4,7 @@ package io.github.sullis.microbenchmarks;
 import com.aayushatharva.brotli4j.Brotli4jLoader;
 import com.aayushatharva.brotli4j.encoder.Encoder;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openjdk.jmh.annotations.AuxCounters;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -27,15 +28,40 @@ import com.aayushatharva.brotli4j.encoder.BrotliOutputStream;
 @State(Scope.Thread)
 @Threads(1)
 public class CompressionBenchmark {
-
     @Param
     private CompressionType compressionType;
-    @Param(value = { "100000" })
+    @Param(value = { "100" })
     private int size;
     private byte[] textBytes;
 
+
+    @AuxCounters(AuxCounters.Type.EVENTS)
+    @State(value=Scope.Thread)
+    public static class CompressionInfo {
+        public long uncompressedByteCount = 0;
+        public long compressedByteCount = 0;
+
+        void update(final long uncompressedBytes, final long compressedBytes) {
+            System.out.println("update called " + uncompressedBytes + ", " + compressedBytes);
+            uncompressedByteCount += uncompressedBytes;
+            compressedByteCount += compressedBytes;
+            System.out.println("update: compressionPercentage=" + compressionPercentage());
+        }
+
+        private double compressionPercentage() {
+          assert(uncompressedByteCount > compressedByteCount);
+          double diff = uncompressedByteCount - compressedByteCount;
+          assert(diff >= 0);
+          final double result = Math.round((100 * (diff / uncompressedByteCount)));
+          System.out.println("uncompressedByteCount: " + uncompressedByteCount);
+          System.out.println("compressedByteCount: " + compressedByteCount);
+          System.out.println("compressionPercentage: " + result);
+          return result;
+        }
+    }
+
     @Setup
-    public void setup() {
+    public void beforeBenchmark() {
         Brotli4jLoader.ensureAvailability();
         textBytes = RandomStringUtils.random(size, "ab").getBytes(StandardCharsets.UTF_8);
     }
@@ -43,10 +69,11 @@ public class CompressionBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
-    public void compress(final Blackhole bh) throws Exception {
+    public void compress(final Blackhole bh, final CompressionInfo compressionInfo) throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
         CompressionOps ops = this.compressionType.supplier.get();
         ops.compress(textBytes, baos);
+        compressionInfo.update(this.textBytes.length, baos.size());
         bh.consume(baos);
         bh.consume(ops);
     }
