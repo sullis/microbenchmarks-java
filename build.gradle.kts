@@ -49,7 +49,7 @@ jmh {
     iterations.set(5)
     warmupIterations.set(2)
     failOnError.set(true)
-    jmhVersion.set("1.36")
+    jmhVersion.set("1.37")
 }
 
 val brotli4jVersion = "1.12.0"
