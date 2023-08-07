@@ -58,7 +58,7 @@ val netty5Version = "5.0.0.Alpha5"
 val zuulOssVersion = "2.3.1-SNAPSHOT"
 
 dependencies {
-    jmh("org.springframework:spring-web:6.0.9")
+    jmh("org.springframework:spring-web:6.0.11")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.3")
     jmh("com.google.guava:guava:31.1-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.7")
