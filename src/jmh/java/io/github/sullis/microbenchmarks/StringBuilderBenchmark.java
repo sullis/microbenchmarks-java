@@ -33,9 +33,7 @@ public class StringBuilderBenchmark {
 
     @Setup
     public void setup() {
-        System.out.println("benchmark setup");
         final int numberOfSegments = lineLength / segmentSize;
-        System.out.println("numberOfSegments: " + numberOfSegments);
         segments = new String[numberOfSegments];
         for (int i = 0; i < numberOfSegments; i++) {
             segments[i] = RandomStringUtils.randomAlphabetic(segmentSize);
@@ -46,10 +44,8 @@ public class StringBuilderBenchmark {
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void append(final Blackhole bh) {
-        System.out.println("benchmark append");
         StringBuilder stringBuilder = new StringBuilder(stringBuilderInitialCapacity);
         for (int i = 0; i < segments.length; i++) {
-            System.out.println("capacity: " + stringBuilder.capacity());
             stringBuilder.append(segments[i]);
         }
         bh.consume(stringBuilder);
