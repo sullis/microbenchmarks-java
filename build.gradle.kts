@@ -50,6 +50,7 @@ jmh {
     warmupIterations.set(2)
     failOnError.set(true)
     jmhVersion.set("1.37")
+    profilers.set(listOf("gc"))
 }
 
 val brotli4jVersion = "1.12.0"
