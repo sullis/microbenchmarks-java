@@ -16,15 +16,44 @@ import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Thread)
 public class StringBuilderBenchmark {
-    @Param(value = { "16", "2000" })
-    private int stringBuilderInitialCapacity;
-
     private final int lineLength = 2000;
 
     private final int segmentSize = 50;
 
     private String[] segments;
 
+    @Param
+    private StringBuilderSupplier stringBuilderSupplier;
+
+    public enum StringBuilderSupplier {
+
+        INIT_CAPACITY_16() {
+            @Override
+            public StringBuilder get() {
+                return new StringBuilder(16);
+            }
+        },
+        INIT_CAPACITY_2000() {
+            @Override
+            public StringBuilder get() {
+                return new StringBuilder(2000);
+            }
+        },
+        THREAD_LOCAL_INIT_CAPACITY_2000() {
+            @Override
+            public StringBuilder get() {
+                StringBuilder sb = ThreadLocal.withInitial(() -> new StringBuilder(2000)).get();
+                sb.setLength(0);
+                return sb;
+            }
+
+        }
+        ;
+
+        public StringBuilder get() {
+            return null;
+        }
+    }
     @Setup
     public void setup() {
         final int numberOfSegments = lineLength / segmentSize;
@@ -38,7 +67,7 @@ public class StringBuilderBenchmark {
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void append(final Blackhole bh) {
-        StringBuilder stringBuilder = new StringBuilder(stringBuilderInitialCapacity);
+        StringBuilder stringBuilder = stringBuilderSupplier.get();
         for (int i = 0; i < segments.length; i++) {
             stringBuilder.append(segments[i]);
         }
