@@ -56,7 +56,7 @@ jmh {
 val brotli4jVersion = "1.12.0"
 val nettyVersion = "4.1.100.Final"
 val netty5Version = "5.0.0.Alpha5"
-val zuulOssVersion = "2.3.1-SNAPSHOT"
+val zuulOssVersion = "2.4.0-SNAPSHOT"
 
 dependencies {
     jmh("org.springframework:spring-web:6.0.11")
