@@ -61,7 +61,7 @@ val zuulOssVersion = "2.4.1-SNAPSHOT"
 dependencies {
     jmh("org.springframework:spring-web:6.1.4")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.3")
-    jmh("com.google.guava:guava:31.1-jre")
+    jmh("com.google.guava:guava:33.0.0-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.7")
     jmh("org.apache.commons:commons-lang3:3.12.0")
     jmh("com.netflix.zuul:zuul-core:$zuulOssVersion")
