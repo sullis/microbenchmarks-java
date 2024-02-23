@@ -33,16 +33,16 @@ public class StringBuilderBenchmark {
                 return new StringBuilder(16);
             }
         },
-        INIT_CAPACITY_2000() {
+        INIT_CAPACITY_2048() {
             @Override
             public StringBuilder get() {
-                return new StringBuilder(2000);
+                return new StringBuilder(2048);
             }
         },
-        THREAD_LOCAL_INIT_CAPACITY_2000() {
+        THREAD_LOCAL_INIT_CAPACITY_2048() {
             @Override
             public StringBuilder get() {
-                StringBuilder sb = ThreadLocal.withInitial(() -> new StringBuilder(2000)).get();
+                StringBuilder sb = ThreadLocal.withInitial(() -> new StringBuilder(2048)).get();
                 sb.setLength(0);
                 return sb;
             }
