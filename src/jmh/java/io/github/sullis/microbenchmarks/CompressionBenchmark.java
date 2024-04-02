@@ -3,6 +3,7 @@ package io.github.sullis.microbenchmarks;
 
 import com.aayushatharva.brotli4j.Brotli4jLoader;
 import com.aayushatharva.brotli4j.encoder.Encoder;
+import com.github.luben.zstd.Zstd;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -111,7 +112,10 @@ public class CompressionBenchmark {
         }),
         BROTLI_0(Brotli4jHelper.brotli(0)),
         BROTLI_4(Brotli4jHelper.brotli(4)),
-        BROTLI_11(Brotli4jHelper.brotli(11));
+        BROTLI_11(Brotli4jHelper.brotli(11)),
+        ZSTD_NEGATIVE_7(ZstdHelper.zstd(-7)),
+        ZSTD_ZERO(ZstdHelper.zstd(0)),
+        ZSTD_SEVEN(ZstdHelper.zstd(7));
 
         private final Supplier<CompressionOps> supplier;
 
@@ -158,6 +162,23 @@ public class CompressionBenchmark {
             brotli.write(data);
             brotli.flush();
             brotli.close();
+        }
+    }
+
+    static class ZstdHelper {
+        public static Supplier<CompressionOps> zstd(final int compressionLevel) {
+            return new Supplier<CompressionOps>() {
+                @Override
+                public CompressionOps get() {
+                    return new CompressionOps() {
+
+                        @Override
+                        public void compress(final byte[] data, final OutputStream out) throws IOException {
+                            Zstd.compress(data, compressionLevel);
+                        }
+                    };
+                }
+            };
         }
     }
 }
