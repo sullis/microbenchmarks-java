@@ -62,7 +62,7 @@ val log4jVersion = "2.23.1"
 dependencies {
     jmh("org.springframework:spring-web:6.1.5")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.3")
-    jmh("com.google.guava:guava:33.0.0-jre")
+    jmh("com.google.guava:guava:33.1.0-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.8")
     jmh("org.apache.commons:commons-lang3:3.12.0")
     jmh("com.netflix.zuul:zuul-core:$zuulOssVersion")
