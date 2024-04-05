@@ -60,7 +60,7 @@ val zuulOssVersion = "2.5.0-SNAPSHOT"
 val log4jVersion = "2.23.1"
 
 dependencies {
-    jmh("org.springframework:spring-web:6.1.4")
+    jmh("org.springframework:spring-web:6.1.5")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.3")
     jmh("com.google.guava:guava:33.0.0-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.1.7")
