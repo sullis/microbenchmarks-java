@@ -39,7 +39,7 @@ public class CompressionBenchmark {
     private static final ConcurrentHashMap<String, byte[]> DATA = new ConcurrentHashMap<>();
     @Param
     private CompressionType compressionType;
-    @Param(value = { "10000.txt", "100000.txt" })
+    @Param(value = { "100000.txt" })
     private String filename;
     private byte[] textBytes;
 
