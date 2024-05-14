@@ -52,11 +52,31 @@ public class TlabBenchmark {
         bh.consume(Fruit.values());
     }
 
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    @Threads(1)
+    @Fork(jvmArgs = "-XX:+UseTLAB")
+    public void tlabStaticEnumValuesArray(final Blackhole bh) {
+        bh.consume(Fruit.STATIC_FRUIT_VALUES);
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @Benchmark
+    @Threads(1)
+    @Fork(jvmArgs = "-XX:-UseTLAB")
+    public void noTlabStaticEnumValuesArray(final Blackhole bh) {
+        bh.consume(Fruit.STATIC_FRUIT_VALUES);
+    }
+
     public enum Fruit {
         APPLE("Apple"),
         BANANA("Banana"),
         ORANGE("Orange"),
         STRAWBERRY("Strawberry");
+
+        public static final Fruit[] STATIC_FRUIT_VALUES = values();
 
         private String id;
         Fruit(String id) {
