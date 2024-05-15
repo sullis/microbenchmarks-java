@@ -1,6 +1,6 @@
 plugins {
     `java`
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "1.9.24"
 }
 
 repositories {
@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
 }
