@@ -1,22 +1,17 @@
 package io.github.sullis.microbenchmarks;
 
-import io.netty.channel.EventLoopGroup;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
 import reactor.netty.DisposableServer;
 import reactor.netty.http.server.HttpServer;
 import reactor.netty.resources.LoopResources;
@@ -44,7 +39,9 @@ public class ReactorNettyServerBenchmark {
         System.out.println("ReactorNetty HttpServer port: " + server.port());
         httpClient = HttpClient.newHttpClient();
         final URI uri = URI.create("http://localhost:" + server.port() + "/");
-        httpGetRequest = HttpRequest.newBuilder().GET().uri(uri).build();
+        httpGetRequest = HttpRequest.newBuilder().GET().uri(uri)
+            .timeout(Duration.ofMillis(100))
+            .build();
     }
 
     @BenchmarkMode(Mode.Throughput)
