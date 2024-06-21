@@ -41,8 +41,7 @@ public class ReactorNettyServerBenchmark {
                 .compress(false)
                 .runOn(loopResources, preferNativeTransport)
                 .bindNow();
-
-        server.onDispose().block();
+        System.out.println("ReactorNetty HttpServer port: " + server.port());
         httpClient = HttpClient.newHttpClient();
         final URI uri = URI.create("http://localhost:" + server.port() + "/");
         httpGetRequest = HttpRequest.newBuilder().GET().uri(uri).build();
