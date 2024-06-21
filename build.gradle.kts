@@ -60,6 +60,7 @@ val zuulOssVersion = "2.5.0-SNAPSHOT"
 val log4jVersion = "2.23.1"
 
 dependencies {
+    jmh("io.projectreactor.netty:reactor-netty-http:1.1.20")
     jmh("org.springframework:spring-web:6.1.5")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.14.3")
     jmh("com.google.guava:guava:33.1.0-jre")
@@ -68,6 +69,8 @@ dependencies {
     jmh("com.netflix.zuul:zuul-core:$zuulOssVersion")
     jmh("io.netty:netty-codec-http:$nettyVersion")
     jmh("io.netty:netty-codec-http2:$nettyVersion")
+    jmh("io.netty:netty-transport-native-epoll:$nettyVersion:linux-x86_64")
+    jmh("io.netty:netty-transport-native-epoll:$nettyVersion:linux-aarch_64")
     jmh("io.netty:netty-common:$nettyVersion")
     jmh("io.netty:netty5-buffer:$netty5Version")
     jmh("io.netty:netty5-common:$netty5Version")
