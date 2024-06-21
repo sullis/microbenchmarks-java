@@ -32,6 +32,7 @@ public class ReactorNettyServerBenchmark {
 
         server =
             HttpServer.create()
+                .handle((request, response) -> request.receive().then())
                 .accessLog(false)
                 .compress(false)
                 .runOn(loopResources, preferNativeTransport)
