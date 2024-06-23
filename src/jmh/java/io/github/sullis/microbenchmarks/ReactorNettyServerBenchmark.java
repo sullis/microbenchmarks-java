@@ -12,6 +12,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import reactor.core.publisher.Mono;
 import reactor.netty.DisposableServer;
 import reactor.netty.http.server.HttpServer;
 import reactor.netty.resources.LoopResources;
@@ -19,6 +20,7 @@ import reactor.netty.resources.LoopResources;
 
 @State(Scope.Thread)
 public class ReactorNettyServerBenchmark {
+    private static final String RESPONSE_BODY = "a".repeat(5000);
     private DisposableServer server;
     private HttpClient httpClient;
     private HttpRequest httpGetRequest;
@@ -32,7 +34,7 @@ public class ReactorNettyServerBenchmark {
 
         server =
             HttpServer.create()
-                .handle((request, response) -> request.receive().then())
+                .handle((request, response) -> response.sendString(Mono.just(RESPONSE_BODY)))
                 .accessLog(false)
                 .compress(false)
                 .runOn(loopResources, preferNativeTransport)
