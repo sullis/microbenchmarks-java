@@ -37,7 +37,7 @@ public class ReactorNettyServerBenchmark {
                 .handle((request, response) -> response.sendString(Mono.just(RESPONSE_BODY)))
                 .accessLog(false)
                 .compress(false)
-                .runOn(loopResources, preferNativeTransport)
+                .runOn(loopResources, preferNativeTransport);
 
         System.out.println("httpServer: " + httpServer.configuration());
 
