@@ -39,8 +39,6 @@ public class ReactorNettyServerBenchmark {
                 .compress(false)
                 .runOn(loopResources, preferNativeTransport);
 
-        System.out.println("httpServer: " + httpServer.configuration());
-
         server = httpServer.bindNow();
 
         System.out.println("ReactorNetty HttpServer port: " + server.port());
@@ -51,7 +49,7 @@ public class ReactorNettyServerBenchmark {
             .header("aaa", "a-value")
             .header("bbb", "b-value")
             .header("ccc", "c-value")
-            .timeout(Duration.ofMillis(100))
+            .timeout(Duration.ofMillis(1000))
             .build();
     }
 
