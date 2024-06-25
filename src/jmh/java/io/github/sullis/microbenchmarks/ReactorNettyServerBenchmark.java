@@ -20,7 +20,7 @@ import reactor.netty.resources.LoopResources;
 
 @State(Scope.Thread)
 public class ReactorNettyServerBenchmark {
-    private static final String RESPONSE_BODY = "a".repeat(5000);
+    private static final String RESPONSE_BODY = "a".repeat(250_000);
     private DisposableServer server;
     private HttpClient httpClient;
     private HttpRequest httpGetRequest;
@@ -32,17 +32,25 @@ public class ReactorNettyServerBenchmark {
     public void setup() throws Exception {
         LoopResources loopResources = LoopResources.create("test");
 
-        server =
+        HttpServer httpServer =
             HttpServer.create()
                 .handle((request, response) -> response.sendString(Mono.just(RESPONSE_BODY)))
                 .accessLog(false)
                 .compress(false)
                 .runOn(loopResources, preferNativeTransport)
-                .bindNow();
+
+        System.out.println("httpServer: " + httpServer.configuration());
+
+        server = httpServer.bindNow();
+
         System.out.println("ReactorNetty HttpServer port: " + server.port());
+
         httpClient = HttpClient.newHttpClient();
         final URI uri = URI.create("http://localhost:" + server.port() + "/");
         httpGetRequest = HttpRequest.newBuilder().GET().uri(uri)
+            .header("aaa", "a-value")
+            .header("bbb", "b-value")
+            .header("ccc", "c-value")
             .timeout(Duration.ofMillis(100))
             .build();
     }
