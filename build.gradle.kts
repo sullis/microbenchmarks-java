@@ -78,7 +78,7 @@ dependencies {
     jmh("org.slf4j:slf4j-api:2.0.13")
     jmh("com.netflix.netflix-commons:netflix-commons-util:0.3.0")
     jmh("com.fasterxml.uuid:java-uuid-generator:5.1.0")
-    jmh("com.datastax.oss:java-driver-core:4.15.0")
+    jmh("com.datastax.oss:java-driver-core:4.17.0")
     jmh("com.github.luben:zstd-jni:1.5.6-3")
     jmh("com.aayushatharva.brotli4j:brotli4j:$brotli4jVersion")
     jmh("com.aayushatharva.brotli4j:native-linux-x86_64:$brotli4jVersion")
