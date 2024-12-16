@@ -52,7 +52,7 @@ jmh {
     profilers.set(listOf("gc"))
 }
 
-val brotli4jVersion = "1.17.0"
+val brotli4jVersion = "1.18.0"
 val nettyVersion = "4.1.115.Final"
 val netty5Version = "5.0.0.Alpha5"
 val zuulOssVersion = "2.5.13"
