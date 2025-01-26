@@ -68,3 +68,8 @@ CounterBenchmark.incrementOnly             CACHED_LONG_ADDER_COUNTER_1000_MS  th
 
 ```
 
+
+# Resources
+
+- [How difficult can it be to write efficient code?](https://www.youtube.com/watch?v=sNqbGU-8ys8)  - Roberto Cortez
+
