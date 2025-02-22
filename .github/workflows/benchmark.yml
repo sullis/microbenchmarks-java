@@ -17,11 +17,10 @@ env:
   JDK: '21'
   DISTRIBUTION: 'zulu'
   GRADLE_COMMAND: './gradlew --no-daemon'
-  OS: ${{ github.event.inputs.os }}
 
 jobs:
   setup:
-    runs-on: ${{ env.OS }}
+    runs-on: ${{ github.event.inputs.os }}
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -34,12 +33,12 @@ jobs:
       - id: set-matrix
         run: echo "::set-output name=matrix::`./gradlew -q benchmarkJson`"
   benchmark:
-    runs-on: ${{ env.OS }}
+    runs-on: ${{ github.event.inputs.os }}
     needs: setup
     strategy:
       matrix:
         microbenchmark: ${{fromJSON(needs.setup.outputs.matrix)}}
-    name:  ${{ matrix.microbenchmark }} ${{ env.OS }}
+    name:  ${{ matrix.microbenchmark }} ${{ github.event.input.os }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ env.JDK }}
