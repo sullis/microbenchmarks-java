@@ -2,6 +2,13 @@ name: benchmark
 
 on:
   workflow_dispatch:
+    inputs:
+      os:
+        type: choice
+        description: OS
+        options:
+        - ubuntu-22.04
+        - ubuntu-22.04-arm
 
 permissions:
   contents: read
@@ -10,10 +17,11 @@ env:
   JDK: '21'
   DISTRIBUTION: 'zulu'
   GRADLE_COMMAND: './gradlew --no-daemon'
+  OS: ${{ github.event.inputs.os }}
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.OS }}
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -26,12 +34,12 @@ jobs:
       - id: set-matrix
         run: echo "::set-output name=matrix::`./gradlew -q benchmarkJson`"
   benchmark:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.OS }}
     needs: setup
     strategy:
       matrix:
         microbenchmark: ${{fromJSON(needs.setup.outputs.matrix)}}
-    name:  ${{ matrix.microbenchmark }}
+    name:  ${{ matrix.microbenchmark }} ${{ env.OS }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ env.JDK }}
