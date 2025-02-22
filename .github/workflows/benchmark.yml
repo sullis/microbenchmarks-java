@@ -35,7 +35,7 @@ jobs:
         run: echo "::set-output name=matrix::`./gradlew -q benchmarkJson`"
   benchmark:
     runs-on: ${{ github.event.inputs.os }}
-    name:  ${{ matrix.microbenchmark }} ${{ github.event.inputs.os }}
+    name:  ${{ matrix.microbenchmark }}
     needs: setup
     strategy:
       matrix:
