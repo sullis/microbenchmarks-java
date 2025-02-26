@@ -74,7 +74,7 @@ dependencies {
     jmh("io.netty:netty5-buffer:$netty5Version")
     jmh("io.netty:netty5-common:$netty5Version")
     jmh("org.apache.logging.log4j:log4j-core:$log4jVersion")
-    jmh("org.slf4j:slf4j-api:2.0.16")
+    jmh("org.slf4j:slf4j-api:2.0.17")
     jmh("com.netflix.netflix-commons:netflix-commons-util:0.3.0")
     jmh("com.fasterxml.uuid:java-uuid-generator:5.1.0")
     jmh("com.datastax.oss:java-driver-core:4.17.0")
