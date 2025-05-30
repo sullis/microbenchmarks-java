@@ -8,7 +8,7 @@ plugins {
 testing {
     suites {
         val test by getting(JvmTestSuite::class) {
-            useJUnitJupiter("5.12.0")
+            useJUnitJupiter("5.13.0")
         }
     }
 }
