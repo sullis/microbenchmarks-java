@@ -59,7 +59,7 @@ val zuulOssVersion = "3.1.3"
 val log4jVersion = "2.25.1"
 
 dependencies {
-    jmh("io.projectreactor.netty:reactor-netty-http:1.2.7")
+    jmh("io.projectreactor.netty:reactor-netty-http:1.2.8")
     jmh("org.springframework:spring-web:6.2.8")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.19.1")
     jmh("com.google.guava:guava:33.4.8-jre")
