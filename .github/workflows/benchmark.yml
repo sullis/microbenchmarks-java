@@ -27,7 +27,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up JDK ${{ env.JDK }}
         uses: actions/setup-java@v4
         with:
@@ -43,7 +43,7 @@ jobs:
       matrix:
         microbenchmark: ${{fromJSON(needs.setup.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up JDK ${{ env.JDK }}
         uses: actions/setup-java@v4
         with:
