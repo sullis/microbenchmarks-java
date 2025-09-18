@@ -62,7 +62,7 @@ dependencies {
     jmh("io.projectreactor.netty:reactor-netty-http:1.2.10")
     jmh("org.springframework:spring-web:6.2.11")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.20.0")
-    jmh("com.google.guava:guava:33.4.8-jre")
+    jmh("com.google.guava:guava:33.5.0-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.2.2")
     jmh("org.apache.commons:commons-lang3:3.18.0")
     jmh("com.netflix.zuul:zuul-core:$zuulOssVersion")
