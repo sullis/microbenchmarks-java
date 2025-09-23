@@ -56,7 +56,7 @@ val brotli4jVersion = "1.20.0"
 val nettyVersion = "4.2.6.Final"
 val netty5Version = "5.0.0.Alpha5"
 val zuulOssVersion = "3.2.0"
-val log4jVersion = "2.25.1"
+val log4jVersion = "2.25.2"
 
 dependencies {
     jmh("io.projectreactor.netty:reactor-netty-http:1.2.10")
