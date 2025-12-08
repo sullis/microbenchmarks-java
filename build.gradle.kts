@@ -76,7 +76,7 @@ dependencies {
     jmh("org.apache.logging.log4j:log4j-core:$log4jVersion")
     jmh("org.slf4j:slf4j-api:2.0.17")
     jmh("com.netflix.netflix-commons:netflix-commons-util:0.3.0")
-    jmh("com.fasterxml.uuid:java-uuid-generator:5.1.1")
+    jmh("com.fasterxml.uuid:java-uuid-generator:5.2.0")
     jmh("com.datastax.oss:java-driver-core:4.17.0")
     jmh("com.github.luben:zstd-jni:1.5.7-6")
     jmh("com.aayushatharva.brotli4j:brotli4j:$brotli4jVersion")
