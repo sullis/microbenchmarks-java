@@ -35,7 +35,7 @@ public class NextDoubleBenchmark {
         private final DoubleSupplier supplier;
 
         NextDoubleSupplier(DoubleSupplier supplier) {
-           this.supplier = supplier;
+            this.supplier = supplier;
         }
 
         public double nextDouble() {

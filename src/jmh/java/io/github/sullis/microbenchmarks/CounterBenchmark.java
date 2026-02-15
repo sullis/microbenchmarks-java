@@ -128,7 +128,7 @@ public class CounterBenchmark {
 
     }
 
-    public static interface Counter {
+    interface Counter {
         void increment();
         void decrement();
         long longValue();

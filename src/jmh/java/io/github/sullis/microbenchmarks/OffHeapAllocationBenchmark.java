@@ -49,7 +49,7 @@ public class OffHeapAllocationBenchmark {
         }
 
         public OffHeapAllocationOps newInstance() throws Exception {
-            return clazz.newInstance();
+            return clazz.getDeclaredConstructor().newInstance();
         }
     }
 

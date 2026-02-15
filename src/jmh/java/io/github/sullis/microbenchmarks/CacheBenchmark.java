@@ -73,7 +73,7 @@ public class CacheBenchmark {
         }
     }
 
-    public static interface Cache<K, V> {
+    interface Cache<K, V> {
       void put(K key, V value);
       V get(K key);
     }
