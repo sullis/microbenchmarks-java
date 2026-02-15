@@ -1,18 +1,93 @@
 # microbenchmarks-java
 
-## Run all benchmarks
+A collection of JMH (Java Microbenchmark Harness) benchmarks for measuring performance characteristics of various Java operations, libraries, and data structures.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Available Benchmarks](#available-benchmarks)
+- [Usage](#usage)
+  - [Run All Benchmarks](#run-all-benchmarks)
+  - [Run Specific Benchmark](#run-specific-benchmark)
+  - [Benchmark Configuration](#benchmark-configuration)
+- [Results](#results)
+- [Contributing](#contributing)
+- [Resources](#resources)
+
+## Overview
+
+This project contains performance benchmarks using the Java Microbenchmark Harness (JMH) framework. The benchmarks cover a wide range of topics including concurrency primitives, caching, compression, serialization, and more.
+
+## Prerequisites
+
+- Java 21 or later
+- Gradle (wrapper included)
+
+## Available Benchmarks
+
+The following benchmarks are available in this project:
+
+| Benchmark | Description |
+|-----------|-------------|
+| `ArrayListIterationBenchmark` | ArrayList iteration performance |
+| `CacheBenchmark` | Cache implementation performance (Caffeine, Guava) |
+| `CompressionBenchmark` | Compression algorithm performance (Brotli, Zstd) |
+| `CounterBenchmark` | Counter implementations (AtomicInteger, AtomicLong, LongAdder) |
+| `EnumValuesBenchmark` | Enum values() method performance |
+| `HttpHeadersBenchmark` | HTTP headers parsing and manipulation |
+| `Ip6AddressBenchmark` | IPv6 address parsing and validation |
+| `JacksonTypeReferenceBenchmark` | Jackson JSON TypeReference performance |
+| `Log4j2ClockBenchmark` | Log4j2 clock implementations |
+| `NextDoubleBenchmark` | Random double generation performance |
+| `OffHeapAllocationBenchmark` | Off-heap memory allocation |
+| `RandomBenchmark` | Random number generation |
+| `ReactorNettyServerBenchmark` | Reactor Netty server performance |
+| `Slf4jDebugLoggingBenchmark` | SLF4J debug logging overhead |
+| `StringBuilderBenchmark` | StringBuilder vs String concatenation |
+| `StringGetBytesBenchmark` | String to byte array conversion |
+| `TlabBenchmark` | Thread-local allocation buffer (TLAB) |
+| `UuidBenchmark` | UUID generation algorithms |
+| `ZuulResponseSetBodyBenchmark` | Netflix Zuul response body operations |
+
+## Usage
+
+### Run All Benchmarks
 ```
 ./gradlew clean jmh
 ```
 
-## Run LongAdder benchmark
-```
+### Run Specific Benchmark
+```bash
+# Run CounterBenchmark
 ./gradlew clean jmh -Dbenchmark=CounterBenchmark
+
+# Run CacheBenchmark
+./gradlew clean jmh -Dbenchmark=CacheBenchmark
+
+# Run CompressionBenchmark
+./gradlew clean jmh -Dbenchmark=CompressionBenchmark
 ```
 
+### Benchmark Configuration
 
-## CounterBenchmark results
+The benchmarks are configured with the following default settings (see `build.gradle.kts`):
 
+- **Fork**: 2 iterations
+- **Warmup**: 2 iterations
+- **Measurement**: 5 iterations
+- **Profilers**: GC profiling enabled
+- **JMH Version**: 1.37
+
+You can customize these settings by modifying the `jmh` block in `build.gradle.kts`.
+
+## Results
+
+
+### Sample Results: CounterBenchmark
+
+<details>
+<summary>Click to expand detailed benchmark results</summary>
 
 ```
 MacOS 12.6.1
@@ -65,11 +140,28 @@ CounterBenchmark.incrementOnly                                   ATOMIC_LONG  th
 CounterBenchmark.incrementOnly                                    LONG_ADDER  thrpt   10  1256.043 ±  3.706  ops/us
 CounterBenchmark.incrementOnly               CACHED_LONG_ADDER_COUNTER_10_MS  thrpt   10  1255.447 ±  4.100  ops/us
 CounterBenchmark.incrementOnly             CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10  1254.679 ±  3.406  ops/us
-
 ```
 
+**Key Findings**: LongAdder significantly outperforms AtomicInteger and AtomicLong in high-contention scenarios. For increment-only operations, LongAdder achieves ~104x better throughput than AtomicInteger (1256 ops/us vs 12 ops/us) and ~96x better than AtomicLong (1256 ops/us vs 13 ops/us).
 
-# Resources
+</details>
 
-- [How difficult can it be to write efficient code?](https://www.youtube.com/watch?v=sNqbGU-8ys8)  - Roberto Cortez
+## Contributing
 
+Contributions are welcome! To add a new benchmark:
+
+1. Create a new Java class in `src/jmh/java/io/github/sullis/microbenchmarks/`
+2. Annotate your class with JMH annotations (`@Benchmark`, `@State`, etc.)
+3. Follow the existing benchmark patterns
+4. Run your benchmark locally to verify it works
+5. Submit a pull request
+
+## Resources
+
+- [JMH - Java Microbenchmark Harness](https://github.com/openjdk/jmh) - Official JMH documentation
+- [How difficult can it be to write efficient code?](https://www.youtube.com/watch?v=sNqbGU-8ys8) - Roberto Cortez
+- [JMH Samples](https://github.com/openjdk/jmh/tree/master/jmh-samples/src/main/java/org/openjdk/jmh/samples) - Official JMH examples
+
+## License
+
+See [LICENSE](LICENSE) file for details.
