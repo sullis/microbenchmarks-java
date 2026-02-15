@@ -60,17 +60,17 @@ public class HttpHeadersBenchmark {
         private final Class<? extends HttpHeaderOps> clazz;
 
         HttpHeadersType(Class<? extends HttpHeaderOps> clazz) {
-           this.clazz = clazz;
+            this.clazz = clazz;
         }
 
         public HttpHeaderOps newInstance() throws Exception {
-            return this.clazz.newInstance();
+            return this.clazz.getDeclaredConstructor().newInstance();
         }
     }
 
     interface HttpHeaderOps {
-        public void addHeader(String name, String value);
-        public String getFirst(String name);
+        void addHeader(String name, String value);
+        String getFirst(String name);
     }
 
     static class NettyHttp1 implements HttpHeaderOps {
@@ -83,12 +83,12 @@ public class HttpHeadersBenchmark {
 
         @Override
         public String getFirst(String name) {
-           return headers.get(name);
+            return headers.get(name);
         }
     }
 
-   static class NettyHttp2 implements HttpHeaderOps {
-       private final DefaultHttp2Headers headers = new DefaultHttp2Headers();
+    static class NettyHttp2 implements HttpHeaderOps {
+        private final DefaultHttp2Headers headers = new DefaultHttp2Headers();
 
         @Override
         public void addHeader(String name, String value) {

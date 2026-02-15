@@ -5,9 +5,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
@@ -41,8 +43,6 @@ public class ReactorNettyServerBenchmark {
 
         server = httpServer.bindNow();
 
-        System.out.println("ReactorNetty HttpServer port: " + server.port());
-
         httpClient = HttpClient.newHttpClient();
         final URI uri = URI.create("http://localhost:" + server.port() + "/");
         httpGetRequest = HttpRequest.newBuilder().GET().uri(uri)
@@ -54,6 +54,7 @@ public class ReactorNettyServerBenchmark {
     }
 
     @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     @Benchmark
     public void httpGet() throws Exception {
         httpClient.send(httpGetRequest, HttpResponse.BodyHandlers.discarding());

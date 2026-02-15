@@ -31,8 +31,6 @@ import java.util.function.Supplier;
 import java.util.zip.GZIPOutputStream;
 import com.aayushatharva.brotli4j.encoder.BrotliOutputStream;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 @State(Scope.Thread)
 @Threads(1)
 public class CompressionBenchmark {
@@ -55,11 +53,12 @@ public class CompressionBenchmark {
         }
 
         private double compressionPercentage() {
-          assert(uncompressedByteCount > compressedByteCount);
-          double diff = uncompressedByteCount - compressedByteCount;
-          assert(diff >= 0);
-          final double result = Math.round((100 * (diff / uncompressedByteCount)));
-          return result;
+            if (uncompressedByteCount <= compressedByteCount) {
+                return 0.0;
+            }
+            double diff = uncompressedByteCount - compressedByteCount;
+            final double result = Math.round((100 * (diff / uncompressedByteCount)));
+            return result;
         }
     }
 
@@ -72,7 +71,9 @@ public class CompressionBenchmark {
     static private byte[] loadData(final String filename) {
         return DATA.computeIfAbsent(filename, (k) -> {
             URL fileUrl = Resources.getResource(filename);
-            assertNotNull(fileUrl);
+            if (fileUrl == null) {
+                throw new IllegalArgumentException("Resource not found: " + filename);
+            }
             try {
                 return Resources.toByteArray(fileUrl);
             } catch (IOException ex) {
@@ -125,7 +126,7 @@ public class CompressionBenchmark {
 
         public Supplier<CompressionOps> getSupplier() {
             return this.supplier;
-        };
+        }
 
     }
 

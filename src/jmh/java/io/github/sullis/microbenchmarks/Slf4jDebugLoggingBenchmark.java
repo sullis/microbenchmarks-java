@@ -22,7 +22,7 @@ public class Slf4jDebugLoggingBenchmark {
 
     @Setup
     public void setup() throws Exception {
-        final String loggerName = "example.jmh."; // + UUID.randomUUID().toString();
+        final String loggerName = "example.jmh.";
         logger = LoggerFactory.getLogger(loggerName);
         System.out.println("logger.isDebugEnabled: " + logger.isDebugEnabled());
         assert(logger.isDebugEnabled());

@@ -42,7 +42,7 @@ public class EnumValuesBenchmark {
         private String id;
 
         Fruit(String id) {
-           this.id = id;
+            this.id = id;
         }
 
     }
