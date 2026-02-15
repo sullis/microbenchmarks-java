@@ -142,7 +142,7 @@ CounterBenchmark.incrementOnly               CACHED_LONG_ADDER_COUNTER_10_MS  th
 CounterBenchmark.incrementOnly             CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10  1254.679 ±  3.406  ops/us
 ```
 
-**Key Findings**: LongAdder significantly outperforms AtomicInteger and AtomicLong in high-contention scenarios (up to 95x faster for increment/decrement operations, comparing 1256 ops/us vs 13 ops/us).
+**Key Findings**: LongAdder significantly outperforms AtomicInteger and AtomicLong in high-contention scenarios. For increment-only operations, LongAdder achieves ~104x better throughput than AtomicInteger (1256 ops/us vs 12 ops/us) and ~96x better than AtomicLong (1256 ops/us vs 13 ops/us).
 
 </details>
 
