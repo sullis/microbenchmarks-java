@@ -87,7 +87,7 @@ You can customize these settings by modifying the `jmh` block in `build.gradle.k
 ### Sample Results: CounterBenchmark
 
 <details>
-<summary>Click to expand CounterBenchmark results</summary>
+<summary>Click to expand detailed benchmark results</summary>
 
 ```
 MacOS 12.6.1
@@ -142,7 +142,7 @@ CounterBenchmark.incrementOnly               CACHED_LONG_ADDER_COUNTER_10_MS  th
 CounterBenchmark.incrementOnly             CACHED_LONG_ADDER_COUNTER_1000_MS  thrpt   10  1254.679 ±  3.406  ops/us
 ```
 
-**Key Findings**: LongAdder significantly outperforms AtomicInteger and AtomicLong in high-contention scenarios (up to 100x faster for increment operations).
+**Key Findings**: LongAdder significantly outperforms AtomicInteger and AtomicLong in high-contention scenarios (up to 95x faster for increment/decrement operations, comparing 1256 ops/us vs 13 ops/us).
 
 </details>
 
