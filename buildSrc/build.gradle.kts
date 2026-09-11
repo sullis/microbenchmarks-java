@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.20")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.22.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.22.2")
 }
