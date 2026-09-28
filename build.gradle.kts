@@ -55,7 +55,7 @@ jmh {
 val brotli4jVersion = "1.23.0"
 val nettyVersion = "4.2.18.Final"
 val netty5Version = "5.0.0.Alpha5"
-val zuulOssVersion = "4.1.7"
+val zuulOssVersion = "4.1.9"
 val log4jVersion = "2.26.1"
 
 dependencies {
