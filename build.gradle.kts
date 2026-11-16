@@ -64,7 +64,7 @@ dependencies {
     jmh("com.fasterxml.jackson.core:jackson-databind:2.23.0")
     jmh("com.google.guava:guava:33.8.0-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.3.1")
-    jmh("org.apache.commons:commons-lang3:3.21.0")
+    jmh("org.apache.commons:commons-lang3:3.22.0")
     jmh("com.netflix.zuul:zuul-core:$zuulOssVersion")
     jmh("io.netty:netty-codec-http:$nettyVersion")
     jmh("io.netty:netty-codec-http2:$nettyVersion")
