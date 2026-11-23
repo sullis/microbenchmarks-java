@@ -60,7 +60,7 @@ val log4jVersion = "2.26.1"
 
 dependencies {
     jmh("io.projectreactor.netty:reactor-netty-http:1.4.0")
-    jmh("org.springframework:spring-web:7.0.10")
+    jmh("org.springframework:spring-web:7.1.0")
     jmh("com.fasterxml.jackson.core:jackson-databind:2.23.0")
     jmh("com.google.guava:guava:33.8.0-jre")
     jmh("com.github.ben-manes.caffeine:caffeine:3.3.1")
